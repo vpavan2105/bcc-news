@@ -83,7 +83,7 @@ export default function Navbar(props) {
         </Link>
         <Link>
           <button
-            // onClick={() => props.setMenu("Travel")}
+            onClick={() => props.setMenu("Travel")}
             className="mr-7 font-semibold text-sm"
           >
             Business
