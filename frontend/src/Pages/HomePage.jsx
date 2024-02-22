@@ -40,10 +40,10 @@ function HomePage(props) {
             {news?.filter(data => data.title.includes(props.search)).map((data) => {
                 return <>
                     <Link onClick={()=>addNews(data)} to="/details" state={{data:data}}><div class="max-w-sm rounded overflow-hidden shadow-lg">
-                        <img class="w-full" src={data.urlToImage} alt="Sunset in the mountains" />
-                        <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2">{data.title}</div>
-                            <p class="text-gray-700 text-base">
+                        <img className="w-full" src={data.urlToImage} alt="Sunset in the mountains" />
+                        <div className="px-6 py-4">
+                            <div className="font-bold text-xl mb-2">{data.title}</div>
+                            <p className="text-gray-700 text-base">
                                {data.content}
                             </p>
                         </div>
