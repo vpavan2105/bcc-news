@@ -1,8 +1,12 @@
 import './App.css'
 import CardComponent from './components/CardComponent'
-import Login from './components/Login'
+
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
+
+import { SimpleGrid } from '@chakra-ui/react'
+import Login from './components1/Login'
+import SingUp from './components1/SingUp'
 
 function App() {
 
@@ -15,6 +19,7 @@ function App() {
       <CardComponent/>
     </SimpleGrid>
     <Login/>
+    <SingUp/>
     <Routes>
       <Route path='/' element={<HomePage/>}/>
       {/* <Route path='/login' element={<Login/>}/>
