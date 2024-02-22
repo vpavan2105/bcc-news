@@ -12,7 +12,7 @@ function Login() {
                 {/* FLEX 1 */}
                 <div style={{ minWidth: "50%", textAlign: "center", display: "flex", flexDirection: "column",  justifyContent: "center" }}>
                     <img src={logo} alt="" />
-                    <h2>Sign in with your email or username</h2>
+                    <h1 style={{fontSize:"32px"}}>Sign in with your email or username</h1>
                     <form action="" style={{ display: "flex", flexDirection: "column",  justifyContent: "center" }}>
                         <input type="text" placeholder='Email or username' style={{ width: "70%", height: "40px", borderStyle: "none", margin: "10px auto", textAlign: "center" }} />
                         <button style={{ width: "70%", height: "40px", borderStyle: "none", margin: "5px auto" }}>Next</button>
@@ -23,6 +23,8 @@ function Login() {
                     <hr />
                     <h4>Don't have a BBC account?</h4>
                     <a href="">Register now</a>
+
+
 
                 </div>
                
