@@ -73,7 +73,7 @@ export default function Navbar(props) {
             Entertainment
           </button>
         </Link>
-        <Link>
+        <Link to={"/politics"}>
           <button
             // onClick={() => props.setMenu("Worklife")}
             className="mr-7 font-semibold text-sm"
