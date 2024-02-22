@@ -1,37 +1,11 @@
 import './App.css'
-import Login from './components/Login'
+import Login from './components1/Login'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 
 function App() {
 
-  return (
-    <>
-    <SimpleGrid columns={[2, null, 4]} spacing='40px' px={"150px"}>
-      {/* <CardComponent/>
-      <CardComponent/>
-      <CardComponent/>
-      <CardComponent/> */}
-    </SimpleGrid>
-    <Login/>
-    
-    <Routes>
-      <Route path='/' element={<HomePage/>}/>
-      {/* <Route path='/login' element={<Login/>}/>
-    <> 
-      <SimpleGrid columns={[2, null, 4]} spacing="40px" px={"150px"}>
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-        <CardComponent />
-      </SimpleGrid>
-      <Login />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* <Route path='/login' element={<Login/>}/>
-      <Route path='/general' element={<General/>}/>
-    <>
-    {/* <Login/> */}
+  return ( <>
     <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/login' element={<Login/>}/>

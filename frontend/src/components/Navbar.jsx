@@ -18,7 +18,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="grid grid-cols-3 bg-black text-white fixed top-0">
+    <div className="grid grid-cols-3 bg-black text-white sticky top-0">
       <div className="flex align-center p-2">
         <img src={logo} className="h-10" />
         {login.isAuth ? (
