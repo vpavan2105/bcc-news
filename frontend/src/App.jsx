@@ -7,6 +7,30 @@ function App() {
 
   return (
     <>
+    <SimpleGrid columns={[2, null, 4]} spacing='40px' px={"150px"}>
+      {/* <CardComponent/>
+      <CardComponent/>
+      <CardComponent/>
+      <CardComponent/> */}
+    </SimpleGrid>
+    <Login/>
+    
+    <Routes>
+      <Route path='/' element={<HomePage/>}/>
+      {/* <Route path='/login' element={<Login/>}/>
+    <> 
+      <SimpleGrid columns={[2, null, 4]} spacing="40px" px={"150px"}>
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+      </SimpleGrid>
+      <Login />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path='/login' element={<Login/>}/>
+      <Route path='/general' element={<General/>}/>
+    <>
     {/* <Login/> */}
     <Routes>
       <Route path='/' element={<HomePage/>}/>
