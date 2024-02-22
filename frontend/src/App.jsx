@@ -18,6 +18,7 @@ function App() {
       <CardComponent/> */}
     </SimpleGrid>
     <Login/>
+    
     <Routes>
       <Route path='/' element={<HomePage/>}/>
       {/* <Route path='/login' element={<Login/>}/>
