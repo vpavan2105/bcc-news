@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import { SimpleGrid } from "@chakra-ui/react";
 import Politics from "./Pages/Politics";
+import Sports from "./Pages/Sports";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/sports" element={<Sports />} />
         {/* <Route path='/general' element={<General/>}/>
         <Route path='/sports' element={<Sports/>}/>
         <Route path='/business' element={<Business/>}/>
