@@ -21,7 +21,7 @@ function Politics() {
       setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
       setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
       setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
-      console.log(data);
+      // console.log(data);
     };
     fetchPoliticsNews();
   }, []);
