@@ -35,7 +35,7 @@ function HomePage(props) {
 
 
     return (<>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className='mt-12 p-5 grid grid-cols-4'>
             {news?.filter(data => data.title.includes(props.search)).map((data) => {
                 return <>
