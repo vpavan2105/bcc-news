@@ -10,7 +10,7 @@ import {
 
 import React from "react";
 
-const Sport = () => {
+const Page = () => {
   return (
     <div
       style={{
@@ -96,4 +96,4 @@ const Sport = () => {
   );
 };
 
-export default Sport;
+export default Page;
