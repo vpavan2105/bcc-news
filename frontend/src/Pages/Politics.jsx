@@ -1,17 +1,27 @@
 import Navbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import { SimpleGrid } from "@chakra-ui/react";
-import { Box, Heading, Text, Image, Link } from "@chakra-ui/react";
+import { Divider, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
+import CardComponent from "../components/CardComponent";
 function Politics() {
-  const [politicsNews, setPoliticsNews] = useState([]);
+  const [topNews, setTopNews] = useState([]);
+  const [national, setNationaNews] = useState([]);
+  const [international, setInternationalNews] = useState([]);
+  const [morePolitics, setMorePoliticsNews] = useState([]);
+  const [relatedNews, setRelatedNews] = useState([]);
+
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       const response = await fetch(
-        "https://newsapi.org/v2/top-headlines?category=politics&apiKey=2c8b641058b74a0e9be89b4ed7e79993"
+        "https://red-powerful-snail.cyclic.app/politics"
       );
       const data = await response.json();
-      setPoliticsNews(data.articles);
-      console.log(data.articles);
+      setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
+      setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
+      setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
+      setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
+      setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
+      console.log(data);
     };
     fetchPoliticsNews();
   }, []);
@@ -19,41 +29,88 @@ function Politics() {
     <>
       <Navbar />
       <Box as="section" py="5" bg="gray.100">
-        <Heading as="h1" size="xl" textAlign="center" mb="5">
-          Politics News
+        <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
+          textDecoration="underline"
+        >
+          Top News
         </Heading>
         <SimpleGrid
-          columns={[1, 2, 3]}
+          columns={[1, 2, 4]}
           spacing="20px"
-          px={["10px", "50px", "150px"]}
+          px={["10px", "50px", "100px"]}
         >
-          {politicsNews.map((newsItem, index) => (
-            <Box
-              key={index}
-              bg="white"
-              shadow="md"
-              borderRadius="md"
-              overflow="hidden"
-            >
-              <Link href={newsItem.url} isExternal>
-                <Image
-                  src={newsItem.urlToImage}
-                  alt={newsItem.title}
-                  objectFit="cover"
-                  width="100%"
-                  height="200px"
-                />
-                <Box p="6">
-                  <Heading as="h3" size="md" mb="2" noOfLines={2}>
-                    {newsItem.title}
-                  </Heading>
-                  <Text fontSize="sm" color="gray.600" noOfLines={3}>
-                    {newsItem.description}
-                  </Text>
-                </Box>
-              </Link>
-            </Box>
-          ))}
+          {topNews?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
+          textDecoration="underline"
+        >
+          National Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {national?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
+          textDecoration="underline"
+        >
+          International Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {international?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
+          textDecoration="underline"
+        >
+          More....
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {morePolitics?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
+          textDecoration="underline"
+        >
+          Related News
+        </Heading>
+      
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {relatedNews?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />
+          })}
         </SimpleGrid>
       </Box>
     </>

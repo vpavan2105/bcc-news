@@ -6,6 +6,7 @@ import HomePage from "./Pages/HomePage";
 import { SimpleGrid } from "@chakra-ui/react";
 import Politics from "./Pages/Politics";
 import Sports from "./Pages/Sports";
+import SingleNewsPage from "./components/SingleNewsPage";
 
 function App() {
   return (
@@ -29,10 +30,10 @@ function App() {
         <Route path='/entertainment' element={<Entertainment/>}/>
         <Route path='/science' element={<Science/>}/> */}
         <Route path="/politics" element={<Politics />} />
-        {/* <Route path='/*' element={<SingleNewsPage/>}/> */}
+        <Route path='/news/:id' element={<SingleNewsPage/>}/>
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
