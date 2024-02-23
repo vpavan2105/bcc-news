@@ -244,7 +244,7 @@ const Sports = () => {
           </div>
         </div>
         {/* More top stories */}
-        <Heading as="h6" style={{ color: "black", marginTop: "2.5%" }}>
+        {/* <Heading as="h6" style={{ color: "black", marginTop: "2.5%" }}>
           More top stories
         </Heading>
 
@@ -317,7 +317,7 @@ const Sports = () => {
               alt="Chakra UI"
             />
           </Card>
-        </div>
+        </div> */}
 
         {/* FootBall */}
         <br></br>
@@ -368,27 +368,27 @@ const Sports = () => {
             })}
           </div>
           {/* <div style={{  gap: '5px', width:'22%' }}>
-     <Card style={{ flexBasis: 'calc(12.333% - 2px)', marginBottom:'4%'}}>
-      <CardBody>
-        <Image
-     objectFit='cover'
-     src='https://ichef.bbci.co.uk/news/1024/branded_news/129DC/production/_132425267_gettyimages-1495969032-594x594.jpg'
-      alt='Chakra UI'
-      /> 
-      <br></br>
-      <h4 style={{fontWeight:'bold'}}>The spin maestro who defied odds to reach 500 wickets india all test match in cricket for series</h4>
-       </CardBody>
-     </Card>
-     <Card style={{ flexBasis: 'calc(45.333% - 2px)' }}>
-      <CardBody>
-       <Image src='https://ichef.bbci.co.uk/news/1024/cpsprodpb/DDB3/production/_132555765_p0h950yb.jpg'/>
-       <br></br>
-       <h4 style={{fontWeight:'bold'}}> Bazball' more than just attacking cricket - Dravid</h4>
-      </CardBody>
-      <CardFooter></CardFooter>
-      </Card>
+            <Card style={{ flexBasis: 'calc(12.333% - 2px)', marginBottom:'4%'}}>
+              <CardBody>
+                <Image
+            objectFit='cover'
+            src='https://ichef.bbci.co.uk/news/1024/branded_news/129DC/production/_132425267_gettyimages-1495969032-594x594.jpg'
+              alt='Chakra UI'
+              /> 
+              <br></br>
+              <h4 style={{fontWeight:'bold'}}>The spin maestro who defied odds to reach 500 wickets india all test match in cricket for series</h4>
+              </CardBody>
+            </Card>
+            <Card style={{ flexBasis: 'calc(45.333% - 2px)' }}>
+              <CardBody>
+              <Image src='https://ichef.bbci.co.uk/news/1024/cpsprodpb/DDB3/production/_132555765_p0h950yb.jpg'/>
+              <br></br>
+              <h4 style={{fontWeight:'bold'}}> Bazball' more than just attacking cricket - Dravid</h4>
+              </CardBody>
+              <CardFooter></CardFooter>
+              </Card>
 
-   </div>  */}
+          </div>  */}
         </div>
       </div>
     </>
