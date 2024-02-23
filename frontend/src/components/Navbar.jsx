@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../Redux/actionCreator";
 
 export default function Navbar(props) {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useSelector((state) => state);
@@ -19,7 +20,7 @@ export default function Navbar(props) {
 
   return (
     <div className="grid grid-cols-3 bg-black text-white fixed top-0">
-      <div className="flex align-center p-2">
+      <div className="flex align-center p-2 ">
         <img src={logo} className="h-10" />
         {login.isAuth ? (
           <button
@@ -40,7 +41,7 @@ export default function Navbar(props) {
           </Link>
         )}
       </div>
-      <div className="flex justify-center align-center mt-4">
+      <div className="flex lg:flex-row xs:flex-col xs:none justify-center align-center mt-4 ">
         <Link>
           <button
             // onClick={() => props.setMenu("All")}
@@ -114,6 +115,12 @@ export default function Navbar(props) {
           placeholder="Search BBC"
         />
       </div>
+      <div className="hamburger-menu">
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+              
+       </div>
     </div>
   );
 }
