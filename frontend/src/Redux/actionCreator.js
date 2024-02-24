@@ -16,8 +16,7 @@ export const LogoutAction = () => {
         type: "LOGOUT"
     }
 }
-<<<<<<< HEAD
-const sceincedatautl=`https://red-powerful-snail.cyclic.app/science`
+const sceincedatautl=`https://red-powerful-snail.cyclic.app/science`;
 export const scienceData = () => {
     return async (dispatch) => {
         console.log("data")
@@ -35,9 +34,6 @@ export const scienceData = () => {
       }
     };
   };
-  scienceData();
   
-=======
-
->>>>>>> c0be1719d91b8849569dac2ff1c2e4ba70ec24f8
+  
 

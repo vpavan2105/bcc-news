@@ -52,7 +52,7 @@ function HomePage(props) {
                     </Link>
                 </>
             })}
-        </div> */}
+        </div> 
         </>
     )
 }
