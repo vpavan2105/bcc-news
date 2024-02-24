@@ -107,7 +107,7 @@ function Science() {
                 p={"10px"}
                 color={"white"}
                 fontWeight={"bold"}
-                fontSize={["12px", "16px", "18px"]}
+                fontSize={["16px", "20px", "28px"]}
               >
                 {firstTopNews?.title}
               </Text>

@@ -2,8 +2,21 @@ import React, { Fragment, useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Box, Grid, GridItem, Heading, SimpleGrid, Text } from "@chakra-ui/react";
-import {   fetchBusinessNews, fetchEntertainmentNews, fetchSportsNews, fetchTechnologyNews, generalURL } from "../apiRequest";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import {
+  fetchBusinessNews,
+  fetchEntertainmentNews,
+  fetchSportsNews,
+  fetchTechnologyNews,
+  generalURL,
+} from "../apiRequest";
 import MainSmallerCards from "../components/MainSmallerCards";
 import CardComponent from "../components/CardComponent";
 
@@ -25,34 +38,29 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
- 
-    fetchSportsNews()
-    .then((data) => {
+    fetchSportsNews().then((data) => {
       console.log(data);
       setFirstTopNews(data[0]);
       setOtherTopNews(data.slice(1, 5));
-    })
-    
-    fetchTechnologyNews()
-    .then((data) => {
+    });
+
+    fetchTechnologyNews().then((data) => {
       console.log(data);
       setFirstTechnologyNews(data[0]);
       setOtherTechnologyNews(data.slice(1, 5));
-    })
+    });
 
-    fetchBusinessNews()
-    .then((data) => {
+    fetchBusinessNews().then((data) => {
       console.log(data);
       setFirstBusinessNews(data[0]);
       setOtherBusinessNews(data.slice(1, 5));
-    })
+    });
 
-    fetchEntertainmentNews()
-    .then((data) => {
+    fetchEntertainmentNews().then((data) => {
       console.log(data);
       setFirstEntertainmentNews(data[0]);
       setOtherEntertainmentNews(data.slice(1, 5));
-    })
+    });
 
     const fetchPoliticsNews = async () => {
       setLoading(true);
@@ -106,13 +114,13 @@ function HomePage() {
         >
           <Text
             position={"relative"}
-            top={"70%"}
+            top={"50%"}
             noOfLines={3}
             maxW="calc(100% - 40px)"
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstTopNews?.title}
           </Text>
@@ -157,7 +165,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstTechnologyNews?.title}
           </Text>
@@ -167,7 +175,6 @@ function HomePage() {
           return <MainSmallerCards item={item} key={index} />;
         })}
       </Grid>
-
 
       <Heading
         as="h1"
@@ -203,7 +210,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstBusinessNews?.title}
           </Text>
@@ -248,7 +255,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstEntertainmentNews?.title}
           </Text>
@@ -259,48 +266,47 @@ function HomePage() {
         })}
       </Grid>
 
+      <Box as="section" py="5" bg="gray.100">
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          National Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {national?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
 
       <Box as="section" py="5" bg="gray.100">
-            <Heading
-              as="h1"
-              size="xl"
-              ml={["10px", "50px", "100px"]}
-              mb="5"
-              textDecoration="underline"
-            >
-              National Headlines
-            </Heading>
-            <SimpleGrid
-              columns={[1, 2, 4]}
-              spacing="20px"
-              px={["10px", "50px", "100px"]}
-            >
-              {national?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
-              })}
-            </SimpleGrid>
-          </Box>
-
-          <Box as="section" py="5" bg="gray.100">
-            <Heading
-              as="h1"
-              size="xl"
-              ml={["10px", "50px", "100px"]}
-              mb="5"
-              textDecoration="underline"
-            >
-              International Headlines
-            </Heading>
-            <SimpleGrid
-              columns={[1, 2, 4]}
-              spacing="20px"
-              px={["10px", "50px", "100px"]}
-            >
-              {international?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
-              })}
-            </SimpleGrid>
-          </Box>
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          International Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {international?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
 
       <Footer />
     </div>
