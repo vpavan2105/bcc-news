@@ -68,7 +68,7 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button colorScheme='blue' size='xs' position={"relative"} left={"60%"} top={"-10px"} onClick={handleAddBookMark}>
+        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}}>
           Book Mark
         </Button>
       </Box>
