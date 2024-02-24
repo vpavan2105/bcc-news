@@ -20,8 +20,6 @@ export default function CardComponent({newsItem,isAuth}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const dispatch = useDispatch() ;
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };

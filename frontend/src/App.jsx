@@ -8,8 +8,6 @@ import Politics from "./Pages/Politics";
 import { AdminPage } from "./components1/AdminPage";
 
 
-
-
 import SingleNewsPage from "./components/SingleNewsPage";
 import General from "./Pages/General";
 import Health from "./Pages/Health";
@@ -20,7 +18,7 @@ import Sports from "./Pages/Sports";
 import Technology from "./Pages/Technology";
 import DashBoard from "./Pages/DashBoard";
 import PrivateRoute from "./Routes/PrivateRoute";
-import Contact from "./Pages/Contact";
+// import Contact from "./Pages/Contact";
 import { useEffect } from "react";
 
 function App() {
@@ -82,7 +80,7 @@ function App() {
         <Route path="/politics" element={<Politics />} />
         <Route path='/:category/:id' element={<SingleNewsPage/>}/>
         <Route path='/dashboard' element={  <DashBoard/> }/>
-        <Route path='/contact' element={  <Contact/> }/>
+        {/* <Route path='/contact' element={  <Contact/> }/> */}
       </Routes>
     </>
   )
