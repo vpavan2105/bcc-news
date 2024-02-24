@@ -9,72 +9,72 @@ export default function Footer() {
         Explore the BBC
         <Divider mt={"8px"}/>
         <Flex color="white" justify="space-around" wrap={"wrap"} px={4} py={2}>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"}>
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"}>
                 <Link to={"/"}>
                     Home
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/general"}>
                     General
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/sports"}>
                     Sports
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/entertainment"}>
                     Entertainment
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/politics"}>
                     Politics
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/business"}>
                     Business
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/health"}>
                     Health
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/science"}>
                     Science
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/"}>
                     Earth
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/"}>
                     Culture
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/health"}>
                     Health
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/"}>
                     Future
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/"}>
                     World
                 </Link>
             </Box>
-            <Box w={{ base: "100px", md: "130px" }}  mb={2} fontSize={"14px"} >
+            <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
                 <Link to={"/"}>
                     Weather
                 </Link>

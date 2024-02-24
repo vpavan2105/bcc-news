@@ -3,7 +3,7 @@ import {thunk} from 'redux-thunk';
 
 import { BookmarkReducer, LoginReducer, mainSectionNewsReducer } from './reducers'
 
-const rootReducer = () => combineReducers({
+const rootReducer = combineReducers({
     login: LoginReducer ,
     bookmark: BookmarkReducer,
     mainSectionNews: mainSectionNewsReducer
