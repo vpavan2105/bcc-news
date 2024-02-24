@@ -1,14 +1,26 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { addNewsToBookmark } from "../apiRequest";
 
 export default function CardComponent({newsItem,isAuth}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const dispatch = useDispatch() ;
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
@@ -55,7 +67,7 @@ export default function CardComponent({newsItem,isAuth}) {
           height="200px"
           onClick={handleNavigation}
         />
-        <Box p="6"  onClick={handleNavigation}>
+        <Box p="6" onClick={handleNavigation}>
           <Heading as="h3" size="md" mb="2" noOfLines={2}>
             {newsItem.title}
           </Heading>
