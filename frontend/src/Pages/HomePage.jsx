@@ -33,8 +33,6 @@ function HomePage(props) {
     //     getNews()
     // }, [props.menu])
 
-
-
     return (<>
         <Navbar />
         {/* <div className='mt-12 p-5 grid grid-cols-4'>
