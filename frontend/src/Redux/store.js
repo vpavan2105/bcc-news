@@ -1,7 +1,7 @@
-import { applyMiddleware, combineReducers, createStore, legacy_createStore  } from 'redux'
+import { applyMiddleware, combineReducers, legacy_createStore  } from 'redux'
 import {thunk} from 'redux-thunk';
 
-import { BookmarkReducer, LoginReducer, SceinceReducer } from './reducers'
+import { BookmarkReducer, LoginReducer } from './reducers'
 
 const rootReducer = () => combineReducers({
     login: LoginReducer ,
