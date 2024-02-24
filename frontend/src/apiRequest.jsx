@@ -19,7 +19,7 @@ export async function addNewsToBookmark(newsItem,user=1) {
     try{
         let res = await axios.patch(`${usersURL}/${user}`,{
             bookmark:[
-                newsItem
+              ...newsItem,
             ]
         })
         // let data = await res.json() ;

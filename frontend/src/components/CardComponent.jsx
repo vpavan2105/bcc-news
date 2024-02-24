@@ -10,7 +10,7 @@ export default function CardComponent({newsItem}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
   const navigate = useNavigate();
   const dispatch = useDispatch() ;
-
+ const [userData,setUserData] =useState([]);
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
@@ -20,6 +20,7 @@ export default function CardComponent({newsItem}) {
         let res = await fetch(`https://testing-arqw.onrender.com/users/${1}`);
         let data = await res.json();
         localStorage.setItem('user',data);
+        setUserData(data.bookmark);
       }catch(e){
         console.log(e) ;
       }
@@ -29,7 +30,7 @@ export default function CardComponent({newsItem}) {
 
   const handleAddBookMark = () => {
     dispatch({type:"ADD",payload:newsItem}) ;
-    addNewsToBookmark(newsItem) ;
+    addNewsToBookmark([...userData,newsItem]) ;
   }
  
   return (
