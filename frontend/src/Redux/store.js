@@ -1,9 +1,15 @@
-import { applyMiddleware, combineReducers, legacy_createStore  } from 'redux'
-// import thunk from 'redux-thunk';
-import { LoginReducer } from './reducers'
+import { applyMiddleware, combineReducers, createStore, legacy_createStore  } from 'redux'
+import {thunk} from 'redux-thunk';
 
-const rootReducer = () => combineReducers({
-    login: LoginReducer
+import { LoginReducer, SceinceReducer } from './reducers'
+
+const rootReducer =  combineReducers({
+    login: LoginReducer,
+    // science: SceinceReducer
 })
 
-export const store = legacy_createStore(rootReducer)
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+
+
+
+// export const store = legacy_createStore(SceinceReducer, applyMiddleware(thunk));

@@ -36,9 +36,8 @@ function HomePage(props) {
 
 
     return (<>
-        <Navbar />
-        <Footer/>
-        {/* <div className='mt-12 p-5 grid grid-cols-4'>
+        {/* <Navbar /> */}
+        <div className='mt-12 p-5 grid grid-cols-4'>
             {news?.filter(data => data.title.includes(props.search)).map((data) => {
                 return <>
                     <Link onClick={()=>addNews(data)} to="/details" state={{data:data}}><div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -53,7 +52,7 @@ function HomePage(props) {
                     </Link>
                 </>
             })}
-        </div> */}
+        </div> 
         </>
     )
 }
