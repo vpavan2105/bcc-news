@@ -1,58 +1,82 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Grid, GridItem, Heading, Text } from "@chakra-ui/react";
+import {  sportsURL } from "../apiRequest";
+import MainSmallerCards from "../components/MainSmallerCards";
 
+function HomePage() {
+  const [firstTopNews, setFirstTopNews] = useState({});
+  const [otherTopNews, setOtherTopNews] = useState([]);
+  useEffect(() => {
+    const fetchPoliticsNews = async () => {
+      try {
+        const response = await fetch(`${sportsURL}`);
+        let data = await response.json();
 
-function HomePage(props) {
+        data = data.filter((item) =>
+          item.category === "top-news" ? true : false
+        );
+        console.log(data);
+        setFirstTopNews(data[0]);
+        setOtherTopNews(data.slice(1, 5));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPoliticsNews();
+  }, []);
+  return (
+    <>
+      <Navbar />
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Morning Headlines
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstTopNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"70%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["12px", "16px", "18px"]}
+          >
+            {firstTopNews?.title}
+          </Text>
+        </GridItem>
 
-    // const [news, setNews] = useState([])
-
-    // const addNews = async(data) =>{
-    //     const newsDoc = doc(database,"News",`${data.url.substr(-10,10)}`)
-    //     try{
-    //         await setDoc(newsDoc,{
-    //             title:data.title,
-    //             description:data.description
-    //         })
-    //     }catch(err){
-    //         console.error(err)
-    //     }
-    // }
-
-
-
-    // const getNews = () => {
-    //     fetch(`https://newsapi.org/v2/everything?q=${props.menu ? props.menu : "All"}&sortBy=popularity&apiKey=5c72f98ae15346cc833605f485d65a45`)
-    //         .then(res => res.json())
-    //         .then(json => setNews(json.articles))
-    // }
-
-
-    // useEffect(() => {
-    //     getNews()
-    // }, [props.menu])
-
-    return (<>
-        <Navbar />
-        {/* <div className='mt-12 p-5 grid grid-cols-4'>
-            {news?.filter(data => data.title.includes(props.search)).map((data) => {
-                return <>
-                    <Link onClick={()=>addNews(data)} to="/details" state={{data:data}}><div class="max-w-sm rounded overflow-hidden shadow-lg">
-                        <img className="w-full" src={data.urlToImage} alt="Sunset in the mountains" />
-                        <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">{data.title}</div>
-                            <p className="text-gray-700 text-base">
-                               {data.content}
-                            </p>
-                        </div>
-                    </div>
-                    </Link>
-                </>
-            })}
-        </div>  */}
-        </>
-    )
+        {otherTopNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
+      <Footer />
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;

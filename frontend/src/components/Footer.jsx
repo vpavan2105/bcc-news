@@ -100,9 +100,11 @@ export default function Footer() {
             <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"} >
                 Parental Guidance
             </Box>
-            <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"} >
-                Contact the BBC
-            </Box>
+            <Link to={"/contact"}>
+                <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"} >
+                    Contact the BBC
+                </Box>
+            </Link>
             <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"} >
                 BBC emails for you
             </Box>

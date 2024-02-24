@@ -63,3 +63,12 @@ export const BookmarkReducer = (state= [], action) => {
     }
 
 }
+export const mainSectionNewsReducer = (state= [], action) => {
+    switch(action.type){
+        case "ADD_MAIN_SECTION_NEWS" :
+            return  action.payload  ;
+        default :
+            return state ;
+    }
+
+}
