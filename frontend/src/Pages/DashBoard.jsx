@@ -13,12 +13,13 @@ export default function DashBoard() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    console.log(bookmark);
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try {
         const response = await fetch(`${usersURL}/1`);
         const data = await response.json();
-        console.log(data);
+      
         setLoading(false);
       } catch (error) {
         console.log(error);

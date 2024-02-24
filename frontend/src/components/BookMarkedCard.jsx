@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 export default function BookMarkedCard({newsItem}) {
   const navigate = useNavigate();
   const dispatch = useDispatch() ;
-
+  console.log(newsItem)
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
