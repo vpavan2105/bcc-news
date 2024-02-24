@@ -1,54 +1,44 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Heading,
-  Text,
-  Image,
-  SimpleGrid,
-  Box,
-} from "@chakra-ui/react";
-
-import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import React, { useState, useEffect } from "react";
+import { Divider, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
-import { sportsURL } from "../apiRequest";
+import { healthURL } from "../apiRequest";
 import Footer from "../components/Footer";
-
-export default function Sports(){
+function Health() {
   const [topNews, setTopNews] = useState([]);
-  const [cricket, setCricket ] = useState([]);
-  const [football, setFootball] = useState([]);
-  const [basketball, setBasketball] = useState([]);
-  const [extraSports, setExtraSports] = useState([]);
+  const [national, setNationaNews] = useState([]);
+  const [international, setInternationalNews] = useState([]);
+  const [morePolitics, setMorePoliticsNews] = useState([]);
+  const [relatedNews, setRelatedNews] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchrenderData = async () => {
-    setLoading(true);
-    try {
-      let res = await fetch(`${sportsURL}`);
-      let data = await res.json();
-      console.log(data);
-      setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
-      setCricket(data.filter( item => item.category === "cricket" ? true:false ) )
-      setFootball(data.filter( item => item.category === "football" ? true:false ) )
-      setBasketball(data.filter( item => item.category === "basketball" ? true:false ) )
-      setExtraSports(data.filter( item => item.category === "extra-sports" ? true:false ) )
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      setError(true);
-    }
-  };
-
   useEffect(() => {
-    fetchrenderData();
+    const fetchPoliticsNews = async () => {
+      setLoading(true);
+      try{
+        const response = await fetch(`${healthURL}`);
+        const data = await response.json();
+        setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
+        setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
+        setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
+        setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
+        setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error) ;
+        setLoading(false);
+        setError(true);
+      }
+      
+    };
+    fetchPoliticsNews();
   }, []);
-
-
+  
+ 
   return (
     <>
       <Navbar />
@@ -78,14 +68,14 @@ export default function Sports(){
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  Cricket
+                  National Headlines
                 </Heading>
                 <SimpleGrid
                   columns={[1, 2, 4]}
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {cricket?.map((newsItem, index) => {
+                  {national?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -95,14 +85,14 @@ export default function Sports(){
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  Football
+                  International Headlines
                 </Heading>
                 <SimpleGrid
                   columns={[1, 2, 4]}
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {football?.map((newsItem, index) => {
+                  {international?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -112,14 +102,14 @@ export default function Sports(){
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  Basketball
+                  More....
                 </Heading>
                 <SimpleGrid
                   columns={[1, 2, 4]}
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {basketball?.map((newsItem, index) => {
+                  {morePolitics?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -129,7 +119,7 @@ export default function Sports(){
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  Extra Sports
+                  Related News
                 </Heading>
               
                 <SimpleGrid
@@ -137,15 +127,16 @@ export default function Sports(){
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {extraSports?.map((newsItem, index) => {
+                  {relatedNews?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
               </Box>
-            </>
+              </>
         )
       }
       <Footer />
     </>
   );
 }
+export default Health;

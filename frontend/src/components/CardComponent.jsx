@@ -4,14 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function CardComponent({newsItem}) {
   const navigate = useNavigate();
   const handleNavigation = () => {
-    navigate(`/news/${newsItem.id}`);
+    // navigate(`/${endpoint}/${newsItem.id}`) ;
   }
-  // {
-  //   "id": 4,
-  //   "username": "Saurabh",
-  //   "email": "saurabh@123",
-  //   "password": "2222"
-  // },
   return (
     <>
       <Box
@@ -39,7 +33,7 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button colorScheme='blue' size='xs' position={"relative"} left={"60%"} top={"-10px"}>
+        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}}>
           Book Mark
         </Button>
       </Box>
