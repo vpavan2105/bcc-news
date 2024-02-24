@@ -1,33 +1,17 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Button, Heading, Image, Text } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import {  Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-export default function CardComponent({newsItem}) {
-  const bookmark  = useSelector( state => state.bookmark ) ;
+export default function BookMarkedCard({newsItem}) {
   const navigate = useNavigate();
   const dispatch = useDispatch() ;
 
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  useEffect(()=>{
-    async function fetchUser(){
-      try{
-        let res = await fetch(`https://testing-arqw.onrender.com/users/${1}`);
-        let data = await res.json();
-        localStorage.setItem('user',data);
-      }catch(e){
-        console.log(e) ;
-      }
-    }
-    fetchUser();
-  },[]);
-
-  const handleAddBookMark = () => {
-    dispatch({type:"ADD",payload:newsItem}) ;
+  const handleDeleteNews = () => {
+    dispatch({type:"DELETE",payload:newsItem}) ;
   }
  
   return (
@@ -58,8 +42,8 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}} onClick={handleAddBookMark}>
-          Book Mark
+        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}} onClick={handleDeleteNews}>
+          Delete 
         </Button>
       </Box>
     </>
