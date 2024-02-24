@@ -2,16 +2,17 @@ import {  Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from 'react-redux'
+import { deleteNewsFromBookmark } from "../apiRequest";
 
 export default function BookMarkedCard({newsItem}) {
   const navigate = useNavigate();
   const dispatch = useDispatch() ;
-  console.log(newsItem)
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
   const handleDeleteNews = () => {
     dispatch({type:"DELETE",payload:newsItem}) ;
+    deleteNewsFromBookmark() ;
   }
  
   return (
