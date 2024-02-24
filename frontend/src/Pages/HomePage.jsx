@@ -1,76 +1,82 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { Box, Grid, GridItem, SimpleGrid } from '@chakra-ui/react'
-import { politicsURL } from '../apiRequest';
-import CardComponent from '../components/CardComponent';
-import TopCardComponent from '../components/MainHeaderComponent';
-import MainHeaderComponent from '../components/MainHeaderComponent';
-
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Grid, GridItem, Heading, Text } from "@chakra-ui/react";
+import {  sportsURL } from "../apiRequest";
+import MainSmallerCards from "../components/MainSmallerCards";
 
 function HomePage() {
+  const [firstTopNews, setFirstTopNews] = useState({});
+  const [otherTopNews, setOtherTopNews] = useState([]);
+  useEffect(() => {
+    const fetchPoliticsNews = async () => {
+      try {
+        const response = await fetch(`${sportsURL}`);
+        let data = await response.json();
 
-    const [topNews, setTopNews] = useState([]);
-    // const [national, setNationaNews] = useState([]);
-    // const [international, setInternationalNews] = useState([]);
-    // const [morePolitics, setMorePoliticsNews] = useState([]);
-    // const [relatedNews, setRelatedNews] = useState([]);
-  
-    // const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState(false);
-  
-    useEffect(() => {
-      const fetchPoliticsNews = async () => {
-        // setLoading(true);
-        try{
-          const response = await fetch(`${politicsURL}`);
-          const data = await response.json();
-          setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
-        //   setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
-        //   setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
-        //   setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
-        //   setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
-          console.log(data);
-        //   setLoading(false);
-        } catch (error) {
-          console.log(error) ;
-        //   setLoading(false);
-        //   setError(true);
-        }
-      };
-      fetchPoliticsNews();
-    }, []);
-    return (<>
-        <Navbar />
+        data = data.filter((item) =>
+          item.category === "top-news" ? true : false
+        );
+        console.log(data);
+        setFirstTopNews(data[0]);
+        setOtherTopNews(data.slice(1, 5));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPoliticsNews();
+  }, []);
+  return (
+    <>
+      <Navbar />
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Morning Headlines
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstTopNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"70%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["12px", "16px", "18px"]}
+          >
+            {firstTopNews?.title}
+          </Text>
+        </GridItem>
 
-        {/* <Box px={4}>
-            <Grid
-                h='200px'
-                templateRows='repeat(2, 1fr)'
-                templateColumns='repeat(5, 1fr)'
-                gap={4}
-                >
-                <GridItem rowSpan={2} colSpan={1} bg='tomato' />
-                <GridItem colSpan={2} bg='papayawhip' />
-                <GridItem colSpan={2} bg='papayawhip' />
-                <GridItem colSpan={4} bg='tomato' />
-            </Grid>
-        </Box>
-        <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {topNews?.map((newsItem, index) => {
-                    return <TopCardComponent newsItem={newsItem} key={index} />
-                  })}
-        </SimpleGrid> */}
-        <MainHeaderComponent/>
-        
-        <Footer/>
-        </>
-    )
+        {otherTopNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
+      <Footer />
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;
