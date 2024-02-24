@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../images/logo.png";
 import user from "../images/user.png";
 import lens from "../images/lens.png";
@@ -34,7 +34,8 @@ export default function Navbar() {
             className="ml-2 bg-black"
             placeholder="Search BBC"
             style={{
-              border: "1px solid white",
+              // border: "1px solid white",
+              color: "white",
               borderRadius: "14px",
               paddingTop: "5px",
               paddingBottom: "4px",
@@ -57,12 +58,12 @@ export default function Navbar() {
           <Link to={"/dashboard"}>Dashboard</Link>
 
           {login.isAuth ? (
-              <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           ) : (
-              <button onClick={handleLogin}>
-                <img src={user} alt="User" className="h-7" />
-                Sign in
-              </button>
+            <button onClick={handleLogin}>
+              <img src={user} alt="User" className="h-7" />
+              Sign in
+            </button>
           )}
         </div>
 
