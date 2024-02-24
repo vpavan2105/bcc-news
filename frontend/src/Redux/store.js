@@ -1,9 +1,15 @@
 import { applyMiddleware, combineReducers, legacy_createStore  } from 'redux'
-// import thunk from 'redux-thunk';
-import { LoginReducer } from './reducers'
+import {thunk} from 'redux-thunk';
+
+import { BookmarkReducer, LoginReducer } from './reducers'
 
 const rootReducer = () => combineReducers({
-    login: LoginReducer
+    login: LoginReducer ,
+    bookmark: BookmarkReducer
 })
 
-export const store = legacy_createStore(rootReducer)
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+
+
+
+// export const store = legacy_createStore(SceinceReducer, applyMiddleware(thunk));
