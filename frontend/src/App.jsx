@@ -5,8 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import { SimpleGrid } from "@chakra-ui/react";
 import Politics from "./Pages/Politics";
-import Sports from "./Pages/Sports";
+
 import SingleNewsPage from "./components/SingleNewsPage";
+import General from "./Pages/General";
+import Health from "./Pages/Health";
+import Business from "./Pages/Business";
+import Entertainment from "./Pages/Entertainment";
+import Science from "./Pages/Science";
+import Sports from "./Pages/Sports";
+import Technology from "./Pages/Technology";
 
 function App() {
   return (
@@ -23,12 +30,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sports" element={<Sports />} />
-        {/* <Route path='/general' element={<General/>}/>
-        <Route path='/sports' element={<Sports/>}/>
+        <Route path='/general' element={<General/>}/>
         <Route path='/business' element={<Business/>}/>
-        <Route path='/health' element={<Health/>}/>
+        <Route path='/technology' element={<Technology/>}/>
         <Route path='/entertainment' element={<Entertainment/>}/>
-        <Route path='/science' element={<Science/>}/> */}
+        <Route path='/science' element={<Science/>}/>
         <Route path="/politics" element={<Politics />} />
         <Route path='/news/:id' element={<SingleNewsPage/>}/>
       </Routes>

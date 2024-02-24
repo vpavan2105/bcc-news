@@ -41,17 +41,15 @@ export default function Navbar() {
         )}
       </div>
       <div className="flex justify-center align-center mt-4">
-        <Link>
+        <Link to={"/"}>
           <button
-            // onClick={() => props.setMenu("All")}
             className="mr-7 font-semibold text-sm"
           >
             Home
           </button>
         </Link>
-        <Link>
+        <Link to={"/general"}>
           <button
-            // onClick={() => props.setMenu("Science")}
             className="mr-7 font-semibold text-sm"
           >
             General
@@ -59,15 +57,13 @@ export default function Navbar() {
         </Link>
         <Link to={"/sports"}>
           <button
-            // onClick={() => props.setMenu("Movies")}
             className="mr-7 font-semibold text-sm"
           >
             Sports
           </button>
         </Link>
-        <Link>
+        <Link to={"/entertainment"}>
           <button
-            // onClick={() => props.setMenu("Food")}
             className="mr-7 font-semibold text-sm"
           >
             Entertainment
@@ -75,31 +71,27 @@ export default function Navbar() {
         </Link>
         <Link to={"/politics"}>
           <button
-            // onClick={() => props.setMenu("Worklife")}
             className="mr-7 font-semibold text-sm"
           >
             Politics
           </button>
         </Link>
-        <Link>
+        <Link to={"/business"}>
           <button
-            // onClick={() => props.setMenu("Travel")}
             className="mr-7 font-semibold text-sm"
           >
             Business
           </button>
         </Link>
-        <Link>
+        <Link to={"/technology"}>
           <button
-            // onClick={() => props.setMenu("Future")}
             className="mr-7 font-semibold text-sm"
           >
-            Health
+            Technology
           </button>
         </Link>
-        <Link>
+        <Link to={"/science"}>
           <button
-            // onClick={() => props.setMenu("Culture")}
             className="mr-7 font-semibold text-sm"
           >
             Science
