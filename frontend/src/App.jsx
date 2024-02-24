@@ -20,6 +20,7 @@ import Sports from "./Pages/Sports";
 import Technology from "./Pages/Technology";
 import DashBoard from "./Pages/DashBoard";
 import PrivateRoute from "./Routes/PrivateRoute";
+import Contact from "./Pages/Contact";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/politics" element={<Politics />} />
         <Route path='/:category/:id' element={<SingleNewsPage/>}/>
         <Route path='/dashboard' element={  <DashBoard/> }/>
+        <Route path='/contact' element={  <Contact/> }/>
       </Routes>
    
     </>
