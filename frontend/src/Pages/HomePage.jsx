@@ -2,57 +2,73 @@ import React, { useEffect, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { Box, Grid, GridItem, SimpleGrid } from '@chakra-ui/react'
+import { politicsURL } from '../apiRequest';
+import CardComponent from '../components/CardComponent';
+import TopCardComponent from '../components/MainHeaderComponent';
+import MainHeaderComponent from '../components/MainHeaderComponent';
 
 
-function HomePage(props) {
+function HomePage() {
 
-    // const [news, setNews] = useState([])
-
-    // const addNews = async(data) =>{
-    //     const newsDoc = doc(database,"News",`${data.url.substr(-10,10)}`)
-    //     try{
-    //         await setDoc(newsDoc,{
-    //             title:data.title,
-    //             description:data.description
-    //         })
-    //     }catch(err){
-    //         console.error(err)
-    //     }
-    // }
-
-
-
-    // const getNews = () => {
-    //     fetch(`https://newsapi.org/v2/everything?q=${props.menu ? props.menu : "All"}&sortBy=popularity&apiKey=5c72f98ae15346cc833605f485d65a45`)
-    //         .then(res => res.json())
-    //         .then(json => setNews(json.articles))
-    // }
-
-
-    // useEffect(() => {
-    //     getNews()
-    // }, [props.menu])
-
-
-
+    const [topNews, setTopNews] = useState([]);
+    // const [national, setNationaNews] = useState([]);
+    // const [international, setInternationalNews] = useState([]);
+    // const [morePolitics, setMorePoliticsNews] = useState([]);
+    // const [relatedNews, setRelatedNews] = useState([]);
+  
+    // const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState(false);
+  
+    useEffect(() => {
+      const fetchPoliticsNews = async () => {
+        // setLoading(true);
+        try{
+          const response = await fetch(`${politicsURL}`);
+          const data = await response.json();
+          setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
+        //   setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
+        //   setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
+        //   setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
+        //   setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
+          console.log(data);
+        //   setLoading(false);
+        } catch (error) {
+          console.log(error) ;
+        //   setLoading(false);
+        //   setError(true);
+        }
+      };
+      fetchPoliticsNews();
+    }, []);
     return (<>
         <Navbar />
-        {/* <div className='mt-12 p-5 grid grid-cols-4'>
-            {news?.filter(data => data.title.includes(props.search)).map((data) => {
-                return <>
-                    <Link onClick={()=>addNews(data)} to="/details" state={{data:data}}><div class="max-w-sm rounded overflow-hidden shadow-lg">
-                        <img className="w-full" src={data.urlToImage} alt="Sunset in the mountains" />
-                        <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">{data.title}</div>
-                            <p className="text-gray-700 text-base">
-                               {data.content}
-                            </p>
-                        </div>
-                    </div>
-                    </Link>
-                </>
-            })}
-        </div>  */}
+
+        {/* <Box px={4}>
+            <Grid
+                h='200px'
+                templateRows='repeat(2, 1fr)'
+                templateColumns='repeat(5, 1fr)'
+                gap={4}
+                >
+                <GridItem rowSpan={2} colSpan={1} bg='tomato' />
+                <GridItem colSpan={2} bg='papayawhip' />
+                <GridItem colSpan={2} bg='papayawhip' />
+                <GridItem colSpan={4} bg='tomato' />
+            </Grid>
+        </Box>
+        <SimpleGrid
+                  columns={[1, 2, 4]}
+                  spacing="20px"
+                  px={["10px", "50px", "100px"]}
+                >
+                  {topNews?.map((newsItem, index) => {
+                    return <TopCardComponent newsItem={newsItem} key={index} />
+                  })}
+        </SimpleGrid> */}
+        <MainHeaderComponent/>
+        
+        <Footer/>
         </>
     )
 }
