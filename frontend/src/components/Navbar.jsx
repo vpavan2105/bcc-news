@@ -24,6 +24,10 @@ export default function Navbar() {
     setShowMenu(!showMenu);
   };
 
+  const handleSearch = () => {
+    
+  };
+
   return (
     <div className="bg-black text-white sticky top-0 z-20 w-full">
       <div className="container mx-auto flex justify-between items-center p-4">
@@ -33,6 +37,7 @@ export default function Navbar() {
           <input
             className="ml-2 bg-black"
             placeholder="Search BBC"
+            onChange={(e)=>handleSearch(e)}
             style={{
               // border: "1px solid white",
               color: "white",
