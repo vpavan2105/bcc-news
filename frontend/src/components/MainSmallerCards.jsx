@@ -13,7 +13,9 @@ export default function MainSmallerCards({item}) {
         backgroundSize="cover"
         backgroundPosition="center"
     >
-        <Text position={"relative"} top={"60%"} noOfLines={3} maxW="calc(100% - 40px)" p={"10px"} color={"white"} fontWeight={"bold"} fontSize={["8px", "10px", "12px"]} > Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, incidunt. </Text>
+        <Text position={"relative"} top={"60%"} noOfLines={3} maxW="calc(100% - 40px)" p={"10px"} color={"white"} fontWeight={"bold"} fontSize={["12px", "16px", "18px"]} > 
+          {item.title}
+        </Text>
     </GridItem>
   </>
   )
