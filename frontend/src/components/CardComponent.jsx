@@ -1,37 +1,47 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { addNewsToBookmark } from "../apiRequest";
 
-export default function CardComponent({newsItem}) {
-  const bookmark  = useSelector( state => state.bookmark ) ;
+export default function CardComponent({ newsItem }) {
+  const bookmark = useSelector((state) => state.bookmark);
   const navigate = useNavigate();
-  const dispatch = useDispatch() ;
+  const dispatch = useDispatch();
 
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  useEffect(()=>{
-    async function fetchUser(){
-      try{
+  useEffect(() => {
+    async function fetchUser() {
+      try {
         let res = await fetch(`https://testing-arqw.onrender.com/users/${1}`);
         let data = await res.json();
-        localStorage.setItem('user',data);
-      }catch(e){
-        console.log(e) ;
+        localStorage.setItem("user", data);
+      } catch (e) {
+        console.log(e);
       }
     }
     fetchUser();
-  },[]);
+  }, []);
 
   const handleAddBookMark = () => {
-    dispatch({type:"ADD",payload:newsItem}) ;
-    addNewsToBookmark(newsItem) ;
-  }
- 
+    dispatch({ type: "ADD", payload: newsItem });
+    addNewsToBookmark(newsItem);
+  };
+
   return (
     <>
       <Box
@@ -42,7 +52,6 @@ export default function CardComponent({newsItem}) {
         overflow="hidden"
         borderBottom={"2px solid blue"}
         cursor={"pointer"}
-       
       >
         <Image
           src={newsItem.urlToImage}
@@ -52,7 +61,7 @@ export default function CardComponent({newsItem}) {
           height="200px"
           onClick={handleNavigation}
         />
-        <Box p="6"  onClick={handleNavigation}>
+        <Box p="6" onClick={handleNavigation}>
           <Heading as="h3" size="md" mb="2" noOfLines={2}>
             {newsItem.title}
           </Heading>
@@ -60,7 +69,16 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}} onClick={handleAddBookMark}>
+        <Button
+          bgColor="black"
+          color={"white"}
+          size="xs"
+          position={"relative"}
+          left={"60%"}
+          top={"-10px"}
+          _hover={{ opacity: 0.8 }}
+          onClick={handleAddBookMark}
+        >
           Book Mark
         </Button>
       </Box>
