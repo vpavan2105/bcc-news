@@ -1,12 +1,16 @@
 import { Box, Button, Grid, GridItem, Heading, Image, SimpleGrid, Text, calc } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function MainHeaderComponent({newsItem}) {
+export default function MainHeaderComponent() {
+  const mainSectionNews = useSelector( state => state.mainSectionNews)
 
   const navigate = useNavigate();
   const handleNavigation = () => {
     // navigate(`/${newsItem.id}`)
   }
+
   return (
     <>
       <Grid
@@ -22,7 +26,8 @@ export default function MainHeaderComponent({newsItem}) {
           overflow="hidden"
           cursor={"pointer"}
           borderRadius={"10px"}
-          backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+          backgroundImage={`url(${mainSectionNews[0].urlToImage})`}
+          // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
           backgroundSize="cover"
           backgroundPosition="center"
         >
@@ -34,7 +39,8 @@ export default function MainHeaderComponent({newsItem}) {
           overflow="hidden"
           cursor={"pointer"}
           borderRadius={"5px"}
-          backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+          backgroundImage={`url(${mainSectionNews[1].urlToImage})`}
+          // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
           backgroundSize="cover"
           backgroundPosition="center"
         >
@@ -46,7 +52,8 @@ export default function MainHeaderComponent({newsItem}) {
           overflow="hidden"
           cursor={"pointer"}
           borderRadius={"5px"}
-          backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+          backgroundImage={`url(${mainSectionNews[2].urlToImage})`}
+          // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
           backgroundSize="cover"
           backgroundPosition="center"
         >
@@ -58,7 +65,8 @@ export default function MainHeaderComponent({newsItem}) {
           overflow="hidden"
           cursor={"pointer"}
           borderRadius={"5px"}
-          backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+          backgroundImage={`url(${mainSectionNews[3].urlToImage})`}
+          // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
           backgroundSize="cover"
           backgroundPosition="center"
         >
@@ -70,7 +78,8 @@ export default function MainHeaderComponent({newsItem}) {
           overflow="hidden"
           cursor={"pointer"}
           borderRadius={"5px"}
-          backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+          backgroundImage={`url(${mainSectionNews[4].urlToImage})`}
+          // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
           backgroundSize="cover"
           backgroundPosition="center"
         >
