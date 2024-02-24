@@ -114,12 +114,7 @@ export default function Navbar() {
           placeholder="Search BBC"
         />
       </div>
-      <div className="hamburger-menu">
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-              
-       </div>
+     
     </div>
   );
 }

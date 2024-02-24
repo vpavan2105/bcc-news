@@ -22,7 +22,7 @@ const Sports = () => {
     setLoading(true);
     try {
       console.log("inside the code");
-      let res = await fetch("https://red-powerful-snail.cyclic.app/sports");
+      let res = await fetch("https://testing-arqw.onrender.com/sports");
       let data = await res.json();
       console.log(data);
       setLoading(false);

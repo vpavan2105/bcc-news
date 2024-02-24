@@ -30,7 +30,7 @@ function App() {
         <Route path='/entertainment' element={<Entertainment/>}/>
         <Route path='/science' element={<Science/>}/> */}
         <Route path="/politics" element={<Politics />} />
-        <Route path='/news/:id' element={<SingleNewsPage/>}/>
+        <Route path='/:category/:id' element={<SingleNewsPage/>}/>
       </Routes>
     </>
   )

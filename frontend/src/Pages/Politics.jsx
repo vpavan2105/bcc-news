@@ -13,7 +13,7 @@ function Politics() {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       const response = await fetch(
-        "https://red-powerful-snail.cyclic.app/politics"
+        "https://testing-arqw.onrender.com/politics"
       );
       const data = await response.json();
       setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )

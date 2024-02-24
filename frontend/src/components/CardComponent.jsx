@@ -1,17 +1,45 @@
-import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function CardComponent({newsItem}) {
+
   const navigate = useNavigate();
   const handleNavigation = () => {
-    navigate(`/news/${newsItem.id}`);
-  }
-  // {
-  //   "id": 4,
-  //   "username": "Saurabh",
-  //   "email": "saurabh@123",
-  //   "password": "2222"
-  // },
+    navigate(`/${newsItem.category_section}/${newsItem.id}`);
+  };
+
+  const handleAddBookMark = () => {
+    axios.get('https://testing-arqw.onrender.com/users/1')
+      .then((res) => res.data)
+      .then((data) => {
+        const isItemInBookmark = data.bookmark.some(item => item.id === newsItem.id); 
+        if(!isItemInBookmark){
+              const updatedBookmark = [...data.bookmark, { ...newsItem }];
+              axios.patch('https://testing-arqw.onrender.com/users/1', { bookmark: updatedBookmark })
+                .then(response => {
+                  // Check if status code is in the range 200-299
+                  if (response.status >= 200 && response.status < 300) {
+                    console.log('User bookmark updated successfully');
+                  } else {
+                    throw new Error('Failed to update user bookmark');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error updating user bookmark:', error);
+                });
+              }else{
+                alert("User bookmark already updated");
+              }
+        })
+      .catch((err) => {
+        console.error(err);
+      });
+     
+    
+  };
+  
+ 
   return (
     <>
       <Box
@@ -22,7 +50,7 @@ export default function CardComponent({newsItem}) {
         overflow="hidden"
         borderBottom={"2px solid blue"}
         cursor={"pointer"}
-        onClick={handleNavigation}
+       
       >
         <Image
           src={newsItem.urlToImage}
@@ -30,8 +58,9 @@ export default function CardComponent({newsItem}) {
           objectFit="cover"
           width="100%"
           height="200px"
+          onClick={handleNavigation}
         />
-        <Box p="6">
+        <Box p="6"  onClick={handleNavigation}>
           <Heading as="h3" size="md" mb="2" noOfLines={2}>
             {newsItem.title}
           </Heading>
@@ -39,7 +68,7 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button colorScheme='blue' size='xs' position={"relative"} left={"60%"} top={"-10px"}>
+        <Button colorScheme='blue' size='xs' position={"relative"} left={"60%"} top={"-10px"} onClick={handleAddBookMark}>
           Book Mark
         </Button>
       </Box>
