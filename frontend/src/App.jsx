@@ -5,6 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import { SimpleGrid } from "@chakra-ui/react";
 import Politics from "./Pages/Politics";
+import { AdminPage } from "./components1/AdminPage";
+
+
+
 
 import SingleNewsPage from "./components/SingleNewsPage";
 import General from "./Pages/General";
@@ -23,8 +27,8 @@ function App() {
       <CardComponent/>
       <CardComponent/>
       <CardComponent/> */}
-      </SimpleGrid>
-      {/* <Login/> */}
+    </SimpleGrid>
+<AdminPage/>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -38,6 +42,7 @@ function App() {
         <Route path="/politics" element={<Politics />} />
         <Route path='/:category/:id' element={<SingleNewsPage/>}/>
       </Routes>
+   
     </>
   )
 }
