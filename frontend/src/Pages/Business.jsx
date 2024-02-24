@@ -6,6 +6,7 @@ import CardComponent from "../components/CardComponent";
 import { businessURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
+import { useSelector } from "react-redux";
 function Business() {
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
@@ -17,6 +18,7 @@ function Business() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const {isAuth}  = useSelector( state => state.login ) ;
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       setLoading(true);
@@ -136,7 +138,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {national?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
+                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -157,7 +159,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {international?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
+                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -178,7 +180,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {stockMarket?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
+                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -200,7 +202,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {relatedNews?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
+                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
               })}
             </SimpleGrid>
           </Box>

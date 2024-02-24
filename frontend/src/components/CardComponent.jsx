@@ -16,40 +16,34 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewsToBookmark } from "../apiRequest";
 
-export default function CardComponent({ newsItem }) {
-  const bookmark = useSelector((state) => state.bookmark);
+export default function CardComponent({newsItem,isAuth}) {
+  const bookmark  = useSelector( state => state.bookmark ) ;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const dispatch = useDispatch() ;
- const [userData,setUserData] =useState([]);
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        let res = await fetch(`https://testing-arqw.onrender.com/users/${1}`);
-        let data = await res.json();
-        localStorage.setItem("user", data);
-      } catch (e) {
-        console.log(e);
-        localStorage.setItem('user',data);
-        setUserData(data.bookmark);
-      }catch(e){
-        console.log(e) ;
-      }
-    }
-    fetchUser();
-  }, []);
-
+  let user;
+  try {
+    user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
+  } catch (error) {
+      console.error("Error parsing user data from localStorage:", error);
+      user = { bookmark: [] }; 
+  }
   const handleAddBookMark = () => {
-    dispatch({ type: "ADD", payload: newsItem });
-    addNewsToBookmark(newsItem);
-  };
-
-    dispatch({type:"ADD",payload:newsItem}) ;
-    addNewsToBookmark([...userData,newsItem]) ;
+    if(isAuth){
+      dispatch({type:"ADD_TO_BOOKMARK",payload:newsItem}) ;
+      if (user.bookmark.some(item => item.id === newsItem.id && item.category_section === newsItem.category_section)) {
+        alert("Already bookmarked")
+      } else{
+        user.bookmark = [...user.bookmark,newsItem] ;
+        localStorage.setItem('user', JSON.stringify(user)) ;
+        addNewsToBookmark([...user.bookmark],user) ;
+      }
+      
+    }else{
+      navigate("/login");
+    }
   }
  
   return (
@@ -79,16 +73,7 @@ export default function CardComponent({ newsItem }) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button
-          bgColor="black"
-          color={"white"}
-          size="xs"
-          position={"relative"}
-          left={"60%"}
-          top={"-10px"}
-          _hover={{ opacity: 0.8 }}
-          onClick={handleAddBookMark}
-        >
+        <Button bgColor='black' color={"white"} size={"sm"} position={"relative"} left={"60%"} top={"-10px"} _hover={{transform: "scale(1.05)"}} onClick={handleAddBookMark}>
           Book Mark
         </Button>
       </Box>

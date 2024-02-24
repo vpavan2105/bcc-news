@@ -8,18 +8,30 @@ import BookMarkedCard from "../components/BookMarkedCard";
 import { usersURL } from "../apiRequest";
 
 export default function DashBoard() {
-  const bookmark = useSelector((state) => state.bookmark);
+  const [ bookmark, setBookmark ] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  let user;
+  try {
+      user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
+  } catch (error) {
+      console.error("Error parsing user data from localStorage:", error);
+      user = { bookmark: [] }; // Fallback value in case of parsing error
+  }
+
+  function deleteNewsItem(){
+    
+  }
   useEffect(() => {
     console.log(bookmark);
-    const fetchPoliticsNews = async () => {
+    const fetchUser = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${usersURL}/1`);
+        const response = await fetch(`${usersURL}/${user.id}`);
         const data = await response.json();
-      
+        console.log(data);
+        setBookmark(data.bookmark); 
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -27,8 +39,8 @@ export default function DashBoard() {
         setError(true);
       }
     };
-    fetchPoliticsNews();
-  }, [bookmark]);
+    fetchUser();
+  }, []);
 
   return (
     <>
