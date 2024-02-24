@@ -21,6 +21,8 @@ export default function CardComponent({ newsItem }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const dispatch = useDispatch() ;
+ const [userData,setUserData] =useState([]);
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
@@ -32,6 +34,10 @@ export default function CardComponent({ newsItem }) {
         localStorage.setItem("user", data);
       } catch (e) {
         console.log(e);
+        localStorage.setItem('user',data);
+        setUserData(data.bookmark);
+      }catch(e){
+        console.log(e) ;
       }
     }
     fetchUser();
@@ -42,6 +48,10 @@ export default function CardComponent({ newsItem }) {
     addNewsToBookmark(newsItem);
   };
 
+    dispatch({type:"ADD",payload:newsItem}) ;
+    addNewsToBookmark([...userData,newsItem]) ;
+  }
+ 
   return (
     <>
       <Box
