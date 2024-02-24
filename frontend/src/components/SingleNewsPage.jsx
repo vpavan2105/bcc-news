@@ -4,24 +4,21 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
+
   Box,
   Heading,
   Image,
   Text,
   Button,
-  Icon,
-  IconButton,
+
   Flex,
-  Avatar,
+
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
-  Center,
+
   useDisclosure,
   AlertDialog,
   AlertDialogOverlay,
@@ -39,6 +36,7 @@ import {
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Navbar from "./Navbar"
 
 export default function SingleNewsPage() {
   const { category, id } = useParams();
@@ -87,21 +85,24 @@ export default function SingleNewsPage() {
 
   return (
     <>
-     <Card boxShadow="md" borderRadius="md" height={'auto'}>
+    <Navbar />
+     <Card  borderRadius="md" height={'auto'} marginTop={'12px'}>
       <Flex direction="column" w="80%" m="auto">
         
-        <CardHeader>
-            <Heading as="h2" size="md" mb="2">
+        <CardHeader boxShadow={' rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;'}>
+            <Heading as="h2" size="md" mb="2" color={'blue'}>
               {singleNews.title}
             </Heading>
             <Text>
               {singleNews.description}
             </Text>
         </CardHeader>
-        <CardBody>
+        <CardBody >
           <Flex direction={{ base: "column", md: "row" }} >
           <Image src={singleNews.urlToImage} alt="News Image" borderRadius="md" objectFit='cover' w={{base:"100%",md:"50%"}} margin={'auto'}/>
-          <Text marginLeft={'10px'}>{singleNews.content}</Text>
+          <Text marginLeft={'10px'}>{singleNews?.content.split('.').map((sentence,index)=>(
+                <p key={index}>{sentence}</p>
+          ))}</Text>
           </Flex>
         </CardBody>
         

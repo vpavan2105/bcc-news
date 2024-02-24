@@ -56,7 +56,7 @@ export const BookmarkReducer = (state= [], action) => {
     switch(action.type){
         case "ADD" :
             console.log([...state, action.payload])
-            [state.filter( item => item.id===action.payload.id && item.category_section===action.payload.category_section ? )] 
+            return [...state, action.payload ] 
         case "DELETE" :
             return [state.filter( item => item.id===action.payload.id && item.category_section===action.payload.category_section ? false : true)] ;
         default :
