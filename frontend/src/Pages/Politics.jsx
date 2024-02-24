@@ -33,7 +33,6 @@ function Politics() {
         setLoading(false);
         setError(true);
       }
-      
     };
     fetchPoliticsNews();
   }, []);
