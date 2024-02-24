@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch,useSelector } from 'react-redux'
+import { addNewsToBookmark } from "../apiRequest";
 
 export default function CardComponent({newsItem}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
@@ -28,6 +29,7 @@ export default function CardComponent({newsItem}) {
 
   const handleAddBookMark = () => {
     dispatch({type:"ADD",payload:newsItem}) ;
+    addNewsToBookmark(newsItem) ;
   }
  
   return (

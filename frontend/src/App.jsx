@@ -18,6 +18,8 @@ import Entertainment from "./Pages/Entertainment";
 import Science from "./Pages/Science";
 import Sports from "./Pages/Sports";
 import Technology from "./Pages/Technology";
+import DashBoard from "./Pages/DashBoard";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 function App() {
   return (
@@ -36,11 +38,11 @@ function App() {
         <Route path="/sports" element={<Sports />} />
         <Route path='/general' element={<General/>}/>
         <Route path='/business' element={<Business/>}/>
-        <Route path='/technology' element={<Technology/>}/>
         <Route path='/entertainment' element={<Entertainment/>}/>
         <Route path='/science' element={<Science/>}/>
         <Route path="/politics" element={<Politics />} />
         <Route path='/:category/:id' element={<SingleNewsPage/>}/>
+        <Route path='/dashboard' element={  <DashBoard/> }/>
       </Routes>
    
     </>

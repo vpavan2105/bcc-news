@@ -53,16 +53,16 @@ export default function Navbar() {
           <Link to={"/entertainment"}>Entertainment</Link>
           <Link to={"/politics"}>Politics</Link>
           <Link to={"/business"}>Business</Link>
-          <Link to={"/technology"}>Technology</Link>
           <Link to={"/science"}>Science</Link>
+          <Link to={"/dashboard"}>Dashboard</Link>
 
           {login.isAuth ? (
-            <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout}>Logout</button>
           ) : (
-            <button onClick={handleLogin}>
-              <img src={user} alt="User" className="h-7" />
-              Sign in
-            </button>
+              <button onClick={handleLogin}>
+                <img src={user} alt="User" className="h-7" />
+                Sign in
+              </button>
           )}
         </div>
 
@@ -97,8 +97,8 @@ export default function Navbar() {
             <Link to={"/entertainment"}>Entertainment</Link>
             <Link to={"/politics"}>Politics</Link>
             <Link to={"/business"}>Business</Link>
-            <Link to={"/technology"}>Technology</Link>
             <Link to={"/science"}>Science</Link>
+            <Link to={"/dashboard"}>Dashboard</Link>
           </div>
 
           {login.isAuth ? (

@@ -1,20 +1,36 @@
 import Navbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import { Divider, SimpleGrid } from "@chakra-ui/react";
+import {  SimpleGrid } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
-import CardComponent from "../components/CardComponent";
-import { entertainmentURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import BookMarkedCard from "../components/BookMarkedCard";
-function DashBoard() {
+import { usersURL } from "../apiRequest";
+
+
+
+export default function DashBoard() {
 
   const bookmark  = useSelector( state => state.bookmark ) ;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-
+    const fetchPoliticsNews = async () => {
+      setLoading(true);
+      try{
+        const response = await fetch(`${usersURL}/1`);
+        const data = await response.json();
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error) ;
+        setLoading(false);
+        setError(true);
+      }
+      
+    };
+    fetchPoliticsNews();
   }, [bookmark]);
 
   return (
@@ -48,4 +64,3 @@ function DashBoard() {
     </>
   );
 }
-export default DashBoard;
