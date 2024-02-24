@@ -1,21 +1,17 @@
-import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Box, Heading, Image } from '@chakra-ui/react'
+import React from 'react'
 
-export default function CardComponent({newsItem}) {
-  const navigate = useNavigate();
-  const handleNavigation = () => {
-    // navigate(`/${endpoint}/${newsItem.id}`) ;
-  }
+export default function SingleNewsPage() {
+    ///// userparams
   return (
     <>
-      <Box
+      {/* <Box
         key={newsItem.id}
         bg="white"
         shadow="md"
         borderRadius="md"
         overflow="hidden"
         borderBottom={"2px solid blue"}
-        cursor={"pointer"}
         onClick={handleNavigation}
       >
         <Image
@@ -33,10 +29,10 @@ export default function CardComponent({newsItem}) {
             {newsItem.description}
           </Text>
         </Box>
-        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}}>
+        <Button colorScheme='blue' size='xs' position={"relative"} left={"60%"} top={"-10px"}>
           Book Mark
         </Button>
-      </Box>
+      </Box> */}
     </>
-  );
+  )
 }

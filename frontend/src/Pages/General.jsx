@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Divider, SimpleGrid } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
-import { politicsURL } from "../apiRequest";
+import { generalURL } from "../apiRequest";
 import Footer from "../components/Footer";
-function Politics() {
+function General() {
   const [topNews, setTopNews] = useState([]);
   const [national, setNationaNews] = useState([]);
   const [international, setInternationalNews] = useState([]);
-  const [morePolitics, setMorePoliticsNews] = useState([]);
-  const [relatedNews, setRelatedNews] = useState([]);
+  const [IsraelGazaWar, setIsraelGazaWarNews] = useState([]);
+  const [UkraineWar, setUkraineWarNews] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -19,13 +19,13 @@ function Politics() {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try{
-        const response = await fetch(`${politicsURL}`);
+        const response = await fetch(`${generalURL}`);
         const data = await response.json();
         setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
         setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
         setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
-        setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
-        setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
+        setIsraelGazaWarNews(data.filter( item => item.category === "Israel-Gaza-war" ? true:false ) )
+        setUkraineWarNews(data.filter( item => item.category === "Ukraine-war" ? true:false ) )
         console.log(data);
         setLoading(false);
       } catch (error) {
@@ -33,10 +33,11 @@ function Politics() {
         setLoading(false);
         setError(true);
       }
+      
     };
     fetchPoliticsNews();
   }, []);
-  
+
   return (
     <>
       <Navbar />
@@ -100,14 +101,14 @@ function Politics() {
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  More....
+                  Israel Gaza War
                 </Heading>
                 <SimpleGrid
                   columns={[1, 2, 4]}
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {morePolitics?.map((newsItem, index) => {
+                  {IsraelGazaWar?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -117,7 +118,7 @@ function Politics() {
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  Related News
+                  Ukraine War
                 </Heading>
               
                 <SimpleGrid
@@ -125,7 +126,7 @@ function Politics() {
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {relatedNews?.map((newsItem, index) => {
+                  {UkraineWar?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -137,4 +138,4 @@ function Politics() {
     </>
   );
 }
-export default Politics;
+export default General;

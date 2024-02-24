@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Divider, SimpleGrid } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
-import { politicsURL } from "../apiRequest";
+import { healthURL } from "../apiRequest";
 import Footer from "../components/Footer";
-function Politics() {
+function Health() {
   const [topNews, setTopNews] = useState([]);
   const [national, setNationaNews] = useState([]);
   const [international, setInternationalNews] = useState([]);
@@ -19,7 +19,7 @@ function Politics() {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try{
-        const response = await fetch(`${politicsURL}`);
+        const response = await fetch(`${healthURL}`);
         const data = await response.json();
         setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
         setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
@@ -33,10 +33,12 @@ function Politics() {
         setLoading(false);
         setError(true);
       }
+      
     };
     fetchPoliticsNews();
   }, []);
   
+ 
   return (
     <>
       <Navbar />
@@ -137,4 +139,4 @@ function Politics() {
     </>
   );
 }
-export default Politics;
+export default Health;

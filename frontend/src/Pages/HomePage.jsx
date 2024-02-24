@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 
 function HomePage(props) {
 
-    const [news, setNews] = useState([])
+    // const [news, setNews] = useState([])
 
-    const addNews = async(data) =>{
-        const newsDoc = doc(database,"News",`${data.url.substr(-10,10)}`)
-        try{
-            await setDoc(newsDoc,{
-                title:data.title,
-                description:data.description
-            })
-        }catch(err){
-            console.error(err)
-        }
-    }
-
-
-
-    const getNews = () => {
-        fetch(`https://newsapi.org/v2/everything?q=${props.menu ? props.menu : "All"}&sortBy=popularity&apiKey=5c72f98ae15346cc833605f485d65a45`)
-            .then(res => res.json())
-            .then(json => setNews(json.articles))
-    }
+    // const addNews = async(data) =>{
+    //     const newsDoc = doc(database,"News",`${data.url.substr(-10,10)}`)
+    //     try{
+    //         await setDoc(newsDoc,{
+    //             title:data.title,
+    //             description:data.description
+    //         })
+    //     }catch(err){
+    //         console.error(err)
+    //     }
+    // }
 
 
-    useEffect(() => {
-        getNews()
-    }, [props.menu])
+
+    // const getNews = () => {
+    //     fetch(`https://newsapi.org/v2/everything?q=${props.menu ? props.menu : "All"}&sortBy=popularity&apiKey=5c72f98ae15346cc833605f485d65a45`)
+    //         .then(res => res.json())
+    //         .then(json => setNews(json.articles))
+    // }
+
+
+    // useEffect(() => {
+    //     getNews()
+    // }, [props.menu])
 
 
 
@@ -51,7 +52,7 @@ function HomePage(props) {
                     </Link>
                 </>
             })}
-        </div>
+        </div> */}
         </>
     )
 }

@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Divider, SimpleGrid } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
-import { politicsURL } from "../apiRequest";
+import { entertainmentURL } from "../apiRequest";
 import Footer from "../components/Footer";
-function Politics() {
+function Entertainment() {
   const [topNews, setTopNews] = useState([]);
   const [national, setNationaNews] = useState([]);
   const [international, setInternationalNews] = useState([]);
-  const [morePolitics, setMorePoliticsNews] = useState([]);
+  const [films, setFilmsNews] = useState([]);
   const [relatedNews, setRelatedNews] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -19,12 +19,12 @@ function Politics() {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try{
-        const response = await fetch(`${politicsURL}`);
+        const response = await fetch(`${entertainmentURL}`);
         const data = await response.json();
         setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
         setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
-        setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
-        setMorePoliticsNews(data.filter( item => item.category === "more-politics" ? true:false ) )
+        setInternationalNews(data.filter( item => item.category === "International" ? true:false ) )
+        setFilmsNews(data.filter( item => item.category === "films" ? true:false ) )
         setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
         console.log(data);
         setLoading(false);
@@ -33,10 +33,11 @@ function Politics() {
         setLoading(false);
         setError(true);
       }
+      
     };
     fetchPoliticsNews();
   }, []);
-  
+
   return (
     <>
       <Navbar />
@@ -100,14 +101,14 @@ function Politics() {
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
                   textDecoration="underline"
                 >
-                  More....
+                  Films
                 </Heading>
                 <SimpleGrid
                   columns={[1, 2, 4]}
                   spacing="20px"
                   px={["10px", "50px", "100px"]}
                 >
-                  {morePolitics?.map((newsItem, index) => {
+                  {films?.map((newsItem, index) => {
                     return <CardComponent newsItem={newsItem} key={index} />
                   })}
                 </SimpleGrid>
@@ -133,8 +134,8 @@ function Politics() {
               </>
         )
       }
-      <Footer />
+      <Footer/>
     </>
   );
 }
-export default Politics;
+export default Entertainment;

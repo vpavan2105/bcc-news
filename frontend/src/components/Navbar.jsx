@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../Redux/actionCreator";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useSelector((state) => state);
@@ -18,7 +18,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="grid grid-cols-3 bg-black text-white fixed top-0">
+    <div className="grid grid-cols-3 bg-black text-white sticky top-0 z-20">
       <div className="flex align-center p-2">
         <img src={logo} className="h-10" />
         {login.isAuth ? (
@@ -41,33 +41,29 @@ export default function Navbar(props) {
         )}
       </div>
       <div className="flex justify-center align-center mt-4">
-        <Link>
+        <Link to={"/"}>
           <button
-            // onClick={() => props.setMenu("All")}
             className="mr-7 font-semibold text-sm"
           >
             Home
           </button>
         </Link>
-        <Link>
+        <Link to={"/general"}>
           <button
-            // onClick={() => props.setMenu("Science")}
             className="mr-7 font-semibold text-sm"
           >
             General
           </button>
         </Link>
-        <Link>
+        <Link to={"/sports"}>
           <button
-            // onClick={() => props.setMenu("Movies")}
             className="mr-7 font-semibold text-sm"
           >
             Sports
           </button>
         </Link>
-        <Link>
+        <Link to={"/entertainment"}>
           <button
-            // onClick={() => props.setMenu("Food")}
             className="mr-7 font-semibold text-sm"
           >
             Entertainment
@@ -75,31 +71,27 @@ export default function Navbar(props) {
         </Link>
         <Link to={"/politics"}>
           <button
-            // onClick={() => props.setMenu("Worklife")}
             className="mr-7 font-semibold text-sm"
           >
             Politics
           </button>
         </Link>
-        <Link>
+        <Link to={"/business"}>
           <button
-            // onClick={() => props.setMenu("Travel")}
             className="mr-7 font-semibold text-sm"
           >
             Business
           </button>
         </Link>
-        <Link>
+        <Link to={"/technology"}>
           <button
-            // onClick={() => props.setMenu("Future")}
             className="mr-7 font-semibold text-sm"
           >
-            Health
+            Technology
           </button>
         </Link>
-        <Link>
+        <Link to={"/science"}>
           <button
-            // onClick={() => props.setMenu("Culture")}
             className="mr-7 font-semibold text-sm"
           >
             Science
@@ -109,7 +101,7 @@ export default function Navbar(props) {
       <div className="ml-40 flex p-4">
         <img src={lens} className="h-6" />
         <input
-          onChange={(e) => props.setSearch(e.target.value)}
+          // onChange={(e) => props.setSearch(e.target.value)}
           className="flex bg-black"
           placeholder="Search BBC"
         />
