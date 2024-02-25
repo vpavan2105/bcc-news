@@ -89,7 +89,7 @@ export default function CardComponent({newsItem,isAuth}) {
           </Text>
           </Box>
         </Box>
-        <Button bgColor='orange' color={"white"} size={"sm"} position={"relative"} left={"60%"} top={"-10px"} _hover={{transform: "scale(1.05)"}} onClick={handleAddBookMark}>
+        <Button bgColor={'rgba(0,0,0,0.8)'} color={"white"} size={"sm"} position={"relative"} left={"60%"} top={"-10px"} _hover={{transform: "scale(1.05)"}} onClick={handleAddBookMark}>
           Book Mark
         </Button>
       </Box>

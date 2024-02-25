@@ -66,7 +66,7 @@ useEffect(() => {
           }
     }
     
-  }, [state1,state.login.isAuth, toast, ]);
+  }, [state1,state.login.isAuth, toast ]);
   
 
 
