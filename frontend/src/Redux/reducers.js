@@ -26,3 +26,11 @@ export const searchReducer = (state = "" , action) => {
             return state ;
     }
 }
+export const DashBoardReducer = (state = [] , action) => {
+    switch(action.type){
+        case "LOAD_DASHBOARD": 
+            return action.payload
+        default :
+            return state ;
+    }
+}

@@ -1,28 +1,25 @@
 import {  Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { useDispatch } from 'react-redux'
-import { deleteNewsFromBookmark } from "../apiRequest";
-import { useEffect } from "react";
 
-export default function BookMarkedCard({newsItem}) {
+export default function BookMarkedCard({newsItem,handleDeleteNews}) {
+
+  const [ logedInUser, setLoggedInUser ] = useState({}) ;
   const navigate = useNavigate();
-  const dispatch = useDispatch() ;
+
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  useEffect(()=>{
-   
-  })
-  const handleDeleteNews = () => {
-    dispatch({type:"DELETE",payload:newsItem}) ;
-    deleteNewsFromBookmark() ;
-  }
+
+  useEffect( ()=>{
+    let user=JSON.parse(localStorage.getItem('user')) ;
+    setLoggedInUser(user)
+  },[] )
  
   return (
     <>
       <Box
-        key={newsItem.id}
         bg="white"
         shadow="md"
         borderRadius="md"
@@ -39,15 +36,17 @@ export default function BookMarkedCard({newsItem}) {
           height="200px"
           onClick={handleNavigation}
         />
-        <Box p="6"  onClick={handleNavigation}>
-          <Heading as="h3" size="md" mb="2" noOfLines={2}>
-            {newsItem.title}
-          </Heading>
-          <Text fontSize="sm" color="gray.600" noOfLines={3}>
-            {newsItem.description}
-          </Text>
+        <Box height={'160px'}>
+          <Box p="6"  onClick={handleNavigation}>
+            <Heading as="h3" size="md" mb="2" noOfLines={2}>
+              {newsItem.title}
+            </Heading>
+            <Text fontSize="sm" color="gray.600" noOfLines={3}>
+              {newsItem.description}
+            </Text>
+          </Box>
         </Box>
-        <Button bgColor='black' color={"white"} size='xs' position={"relative"} left={"60%"} top={"-10px"} _hover={{opacity: 0.8}} onClick={handleDeleteNews}>
+        <Button bgColor='red' color={"white"} size='sm' position={"relative"} left={"70%"} top={"-10px"} _hover={{opacity: 0.8}} onClick={()=>{ handleDeleteNews(newsItem,logedInUser) } }>
           Delete 
         </Button>
       </Box>
