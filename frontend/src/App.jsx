@@ -82,6 +82,7 @@ function App() {
         <Route path='/dashboard' element={  <DashBoard/> }/>
         {/* <Route path='/contact' element={  <Contact/> }/> */}
       </Routes>
+    
     </>
   )
 }
