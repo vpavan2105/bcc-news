@@ -29,7 +29,10 @@ function Login() {
       });
       let logedInUser = usersList.find((temp) => temp.username === username && temp.password === password)
       localStorage.setItem("user", JSON.stringify(logedInUser)); 
-      nevigate("/");
+      setTimeout(() => {
+        nevigate("/");
+      }, 1200);
+      
     }else{
       toast({
         title: "Login Failed",

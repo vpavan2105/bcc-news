@@ -7,6 +7,7 @@ import { generalURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function General() {
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
@@ -17,7 +18,7 @@ function General() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  const navigate = useNavigate() ;
   const search = useSelector(state=>state.search)
 
   useEffect(() => {
@@ -100,9 +101,9 @@ function General() {
               cursor={"pointer"}
               borderRadius={"10px"}
               backgroundImage={`url(${firstTopNews.urlToImage})`}
-              // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
               backgroundSize="cover"
               backgroundPosition="center"
+              onClick={()=>{ navigate(`/${firstTopNews.category_section}/${firstTopNews.id}`); }}
             >
               <Text
                 position={"relative"}

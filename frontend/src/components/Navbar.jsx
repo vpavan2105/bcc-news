@@ -4,17 +4,29 @@ import user from "../images/user.png";
 import lens from "../images/lens.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LogoutAction } from "../Redux/actionCreator";
+import { useToast } from "@chakra-ui/react";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const login = useSelector((state) => state);
+  const toast = useToast();
+  const isAuth = useSelector((state) => state.login.isAuth);
   const [showMenu, setShowMenu] = useState(false);
   const search = useSelector(state=>state.search)
 
   const handleLogout = () => {
-    dispatch(LogoutAction());
+    dispatch({ type: "LOGOUT" });
+    localStorage.removeItem("user");
+    toast({
+      title: "Logout Successful",
+      description: "See you soon!",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+    setTimeout(() => {
+      navigate("/");
+    },1800)
   };
 
   const handleLogin = () => {
@@ -67,7 +79,7 @@ export default function Navbar() {
           <Link to={"/science"}>Science</Link>
           <Link to={"/dashboard"}>Dashboard</Link>
 
-          {login.isAuth ? (
+          {isAuth ? (
             <button onClick={handleLogout}>Logout</button>
           ) : (
             <button onClick={handleLogin}>
@@ -112,7 +124,7 @@ export default function Navbar() {
             <Link to={"/dashboard"}>Dashboard</Link>
           </div>
 
-          {login.isAuth ? (
+          {isAuth ? (
             <button onClick={handleLogout}>Logout</button>
           ) : (
             <button onClick={handleLogin}>Sign in</button>

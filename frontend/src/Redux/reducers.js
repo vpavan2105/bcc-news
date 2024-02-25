@@ -1,10 +1,6 @@
-import { FAILED, LOGIN } from "./actionTypes";
-
 
 const initialLoginState = {
     isAuth: false,
-    token: "",
-    userName: ""
 }
 
 export const LoginReducer = (state = initialLoginState, action) => {

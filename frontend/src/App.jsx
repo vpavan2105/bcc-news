@@ -24,13 +24,11 @@ import SignupForm from "./components1/SignUp";
 import ContactPage from "./Pages/ContactPage";
 
 function App() {
- 
   return (
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path='/signup' element={<SignupForm/> }/>
-
+        <Route path="/signup" element={<SignupForm />} />
 
         <Route path="/" element={<HomePage />} />
         <Route path="/sports" element={<Sports />} />
@@ -39,14 +37,21 @@ function App() {
         <Route path="/entertainment" element={<Entertainment />} />
         <Route path="/science" element={<Science />} />
         <Route path="/politics" element={<Politics />} />
-        <Route path='/dashboard' element={  <DashBoard/> }/>
-        <Route path='/health' element={  <Health/> }/>
+        <Route path="/health" element={<Health />} />
         <Route path="/technology" element={<Technology />} />
         <Route path="/health" element={<Health />} />
-        <Route path="/dashboard" element={ <PrivateRoute> <DashBoard /> </PrivateRoute> } />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              {" "}
+              <DashBoard />{" "}
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/:category/:id" element={<SingleNewsPage/>}/>
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/:category/:id" element={<SingleNewsPage />} />
+        {/* <Route path="/contact" element={<ContactPage />} /> */}
       </Routes>
     </>
   );

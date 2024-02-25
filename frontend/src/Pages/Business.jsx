@@ -7,6 +7,7 @@ import { businessURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function Business() {
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
@@ -19,6 +20,7 @@ function Business() {
   const [error, setError] = useState(false);
 
   const search = useSelector(state=>state.search)
+  const navigate = useNavigate() ;
 
   const {isAuth}  = useSelector( state => state.login ) ;
   useEffect(() => {
@@ -101,9 +103,9 @@ function Business() {
               cursor={"pointer"}
               borderRadius={"10px"}
               backgroundImage={`url(${firstTopNews.urlToImage})`}
-              // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
               backgroundSize="cover"
               backgroundPosition="center"
+              onClick={()=>{ navigate(`/${firstTopNews.category_section}/${firstTopNews.id}`); }}
             >
               <Text
                 position={"relative"}
