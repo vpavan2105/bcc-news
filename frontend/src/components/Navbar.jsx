@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 
 export default function Navbar() {
+  const [showMenu, setShowMenu] = useState(false);
+  const [ loggedInUser, setLoggedInUser ] = useState({});
+  const isAuth = useSelector((state) => state.login.isAuth);
+  const search = useSelector(state=>state.search)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
-  const isAuth = useSelector((state) => state.login.isAuth);
-  const [showMenu, setShowMenu] = useState(false);
-  const search = useSelector(state=>state.search)
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -42,6 +43,8 @@ export default function Navbar() {
     dispatch({type:"SEARCH",payload:e.target.value})
   };
   useEffect(() => {
+    let userInLocalStorage = JSON.parse(localStorage.getItem("user")) || {} ;
+    setLoggedInUser(userInLocalStorage);
     console.log(search)
   },[search])
 
@@ -77,7 +80,10 @@ export default function Navbar() {
           <Link to={"/politics"}>Politics</Link>
           <Link to={"/business"}>Business</Link>
           <Link to={"/science"}>Science</Link>
-          <Link to={"/dashboard"}>Dashboard</Link>
+          {
+            loggedInUser.username==="Admin" ? <Link to={"/admin"}>Admin</Link> : <Link to={"/dashboard"}>Dashboard</Link>
+          }
+          
 
           {isAuth ? (
             <button onClick={handleLogout}>Logout</button>
