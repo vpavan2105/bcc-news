@@ -56,9 +56,14 @@ const ContactFormWrapper = styled.div`
     box-sizing: border-box; /* Ensure padding and border are included in width */
   }
 
+  ::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
   button {
     border: none;
-    padding: 5px 10px;
+    padding: 7px 22px;
     border-radius: 5px;
     margin-bottom: 25px;
     background-color: blue;
@@ -246,7 +251,7 @@ export const ContactForm = () => {
                       disabled={disabled}
                       type="submit"
                     >
-                      Submit Now
+                      Send
                     </button>
                   </form>
                 </div>

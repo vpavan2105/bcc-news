@@ -11,7 +11,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const login = useSelector((state) => state);
   const [showMenu, setShowMenu] = useState(false);
-  const search = useSelector(state=>state.search)
+  const search = useSelector((state) => state.search);
 
   const handleLogout = () => {
     dispatch(LogoutAction());
@@ -27,11 +27,11 @@ export default function Navbar() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch({type:"SEARCH",payload:e.target.value})
+    dispatch({ type: "SEARCH", payload: e.target.value });
   };
   useEffect(() => {
-    console.log(search)
-  },[search])
+    console.log(search);
+  }, [search]);
 
   return (
     <div className="bg-black text-white sticky top-0 z-20 w-full">
@@ -42,7 +42,7 @@ export default function Navbar() {
           <input
             className="ml-2 bg-black"
             placeholder="Search BBC"
-            onChange={(e)=>handleSearch(e)}
+            onChange={(e) => handleSearch(e)}
             style={{
               // border: "1px solid white",
               color: "white",
@@ -70,8 +70,11 @@ export default function Navbar() {
           {login.isAuth ? (
             <button onClick={handleLogout}>Logout</button>
           ) : (
-            <button onClick={handleLogin}>
-              <img src={user} alt="User" className="h-7" />
+            <button
+              onClick={handleLogin}
+              style={{ display: "flex", alignContent: "center" }}
+            >
+              <img src={user} alt="User" className="h-5" />
               Sign in
             </button>
           )}
