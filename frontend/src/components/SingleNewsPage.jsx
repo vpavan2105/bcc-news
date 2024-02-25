@@ -33,7 +33,7 @@ import { faComment, faThumbsUp, faShare} from "@fortawesome/free-solid-svg-icons
 import { faWhatsapp,faInstagram ,faTwitter,faFacebook, faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../index.css";
 import { baseURL } from "../apiRequest";
@@ -48,52 +48,68 @@ export default function SingleNewsPage() {
   const [colorComment, setColorComment] = useState("lightblue");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  
+  const navigate = useNavigate() ;
+  const [ loggedInUser, setLoggedInUser ] = useState({}) ;
   ///// userparams
-  let user=JSON.parse(localStorage.getItem('user')) ;
   useEffect(() => {
+    let localStorageUser = JSON.parse(localStorage.getItem('user')) || {} ;
+    setLoggedInUser(localStorageUser) ;
     axios
       .get(`${baseURL}/${category}/${id}`)
       .then((res) => res.data)
       .then((data) => setSingleNews(data));
-
    
   }, []);
 
   const handleInputComment = async (e) => {
     e.preventDefault();
-  if(comment!=""){
-    axios
-      .get(`${baseURL}/${category}/${id}`)
-      .then((res) => res.data)
-      .then((data) => {
-        const updateComment = [
-          ...data.comments,
-          { user: user.username, comment: comment },
-        ];
-        axios
-          .patch(`${baseURL}/${category}/${id}`, {
-            comments: updateComment,
-          })
-          .then((response) => {
-            // Check if status code is in the range 200-299
-            console.log(response);
-            if (response.status >= 200 && response.status < 300) {
-              console.log("User comment updated successfully");
-              setSingleNews(response.data);
-            } else {
-              throw new Error("Failed to update user bookmark");
-            }
-          })
-          .catch((error) => {
-            console.error("Error updating user bookmark:", error);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
+    if( !loggedInUser.id ){
+      toast({
+        title: "Login First",
+        description: "Please Login to Add Comment",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
       });
-    setComment("");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+      
+    }else{
+      if(comment!=""){
+        axios
+          .get(`${baseURL}/${category}/${id}`)
+          .then((res) => res.data)
+          .then((data) => {
+            const updateComment = [
+              ...data.comments,
+              { user: loggedInUser.username, comment: comment },
+            ];
+            axios
+              .patch(`${baseURL}/${category}/${id}`, {
+                comments: updateComment,
+              })
+              .then((response) => {
+                // Check if status code is in the range 200-299
+                console.log(response);
+                if (response.status >= 200 && response.status < 300) {
+                  console.log("User comment updated successfully");
+                  setSingleNews(response.data);
+                } else {
+                  throw new Error("Failed to update user bookmark");
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating user bookmark:", error);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        setComment("");
+        }
     }
+  
   
   };
   const handleShare = () => {
