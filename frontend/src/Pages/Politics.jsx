@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import { Divider, Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
+import { Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
 import { politicsURL } from "../apiRequest";

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -20,6 +20,7 @@ import {
 import MainSmallerCards from "../components/MainSmallerCards";
 import CardComponent from "../components/CardComponent";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [firstTopNews, setFirstTopNews] = useState({});
@@ -38,6 +39,7 @@ function HomePage() {
   const [international, setInternationalNews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate() ;
 
   const search = useSelector(state=>state.search)
 
@@ -119,6 +121,7 @@ function HomePage() {
           backgroundImage={`url(${firstTopNews.urlToImage})`}
           backgroundSize="cover"
           backgroundPosition="center"
+          onClick={()=>{ navigate(`/${firstTopNews.category_section}/${firstTopNews.id}`); }}
         >
           <Text
             position={"relative"}
@@ -164,6 +167,7 @@ function HomePage() {
           backgroundImage={`url(${firstTechnologyNews.urlToImage})`}
           backgroundSize="cover"
           backgroundPosition="center"
+          onClick={()=>{ navigate(`/${firstTechnologyNews.category_section}/${firstTechnologyNews.id}`); }}
         >
           <Text
             position={"relative"}
@@ -209,6 +213,7 @@ function HomePage() {
           backgroundImage={`url(${firstBusinessNews.urlToImage})`}
           backgroundSize="cover"
           backgroundPosition="center"
+          onClick={()=>{ navigate(`/${firstBusinessNews.category_section}/${firstBusinessNews.id}`); }}
         >
           <Text
             position={"relative"}
@@ -254,6 +259,7 @@ function HomePage() {
           backgroundImage={`url(${firstEntertainmentNews.urlToImage})`}
           backgroundSize="cover"
           backgroundPosition="center"
+          onClick={()=>{ navigate(`/${firstEntertainmentNews.category_section}/${firstEntertainmentNews.id}`); }}
         >
           <Text
             position={"relative"}

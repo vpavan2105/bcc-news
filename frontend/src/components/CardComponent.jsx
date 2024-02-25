@@ -29,8 +29,6 @@ export default function CardComponent({newsItem}) {
   const handleAddBookMark = async() => {
     
     let user=JSON.parse(localStorage.getItem('user')) ;
-  
-
       const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user.id}`)
       const addbookmark=response.data.bookmark
      
