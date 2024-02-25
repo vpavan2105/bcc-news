@@ -53,7 +53,7 @@ export default function SingleNewsPage() {
   let user=JSON.parse(localStorage.getItem('user')) ;
   useEffect(() => {
     axios
-      .get(`${baseURL}/${category}/${user.id}`)
+      .get(`${baseURL}/${category}/${id}`)
       .then((res) => res.data)
       .then((data) => setSingleNews(data));
 
@@ -64,7 +64,7 @@ export default function SingleNewsPage() {
     e.preventDefault();
   if(comment!=""){
     axios
-      .get(`${baseURL}/${category}/${user.id}`)
+      .get(`${baseURL}/${category}/${id}`)
       .then((res) => res.data)
       .then((data) => {
         const updateComment = [
@@ -72,7 +72,7 @@ export default function SingleNewsPage() {
           { user: user.username, comment: comment },
         ];
         axios
-          .patch(`${baseURL}/${category}/${user.id}`, {
+          .patch(`${baseURL}/${category}/${id}`, {
             comments: updateComment,
           })
           .then((response) => {
