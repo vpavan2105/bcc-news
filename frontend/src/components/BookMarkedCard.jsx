@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from 'react-redux'
 import { deleteNewsFromBookmark } from "../apiRequest";
+import { useEffect } from "react";
 
 export default function BookMarkedCard({newsItem}) {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ export default function BookMarkedCard({newsItem}) {
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
+  useEffect(()=>{
+   
+  })
   const handleDeleteNews = () => {
     dispatch({type:"DELETE",payload:newsItem}) ;
     deleteNewsFromBookmark() ;

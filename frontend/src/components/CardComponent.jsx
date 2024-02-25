@@ -14,36 +14,54 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addNewsToBookmark } from "../apiRequest";
+import { addNewsToBookmark, dashBoardURL } from "../apiRequest";
 
 export default function CardComponent({newsItem,isAuth}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
+  const [bookMarkData,setBookmarkData]=useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  let user;
-  try {
-    user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
-  } catch (error) {
-      console.error("Error parsing user data from localStorage:", error);
-      user = { bookmark: [] }; 
-  }
-  const handleAddBookMark = () => {
-    if(isAuth){
-      dispatch({type:"ADD_TO_BOOKMARK",payload:newsItem}) ;
-      if (user.bookmark.some(item => item.id === newsItem.id && item.category_section === newsItem.category_section)) {
+  // let user;
+  // try {
+  //   user = JSON.parse(localStorage.getItem('user')) || { }; // Ensure user is an object with a bookmark property
+  // } catch (error) {
+  //     console.error("Error parsing user data from localStorage:", error);
+  //     user = { bookmark: [] }; 
+  // }
+
+  const handleAddBookMark = async() => {
+    
+    let user;
+    try{
+      user=JSON.parse(localStorage.getItem('user')) || {id:1 };
+    }catch(error){
+      user={id:1}
+    }
+
+      const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user.id}`)
+      const addbookmark=response.data.bookmark
+     
+      console.log(response.data);
+   
+    // if(isAuth){
+      // dispatch({type:"ADD_TO_BOOKMARK",payload:newsItem}) ;
+    
+      if (addbookmark?.some(item => item.id === newsItem.id && item.category_section === newsItem.category_section)) {
         alert("Already bookmarked")
       } else{
-        user.bookmark = [...user.bookmark,newsItem] ;
-        localStorage.setItem('user', JSON.stringify(user)) ;
-        addNewsToBookmark([...user.bookmark],user) ;
+        // user.bookmark = [...user.bookmark,newsItem] ;
+        // localStorage.setItem('user', JSON.stringify(user)) ;
+        
+        addNewsToBookmark([...addbookmark,newsItem],user.id) ;
+        console.log([...addbookmark,newsItem])
       }
       
-    }else{
-      navigate("/login");
-    }
+    // }else{
+    //   navigate("/login");
+    // }
   }
  
   return (
