@@ -2,10 +2,24 @@ import React, { Fragment, useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Box, Grid, GridItem, Heading, SimpleGrid, Text } from "@chakra-ui/react";
-import {   fetchBusinessNews, fetchEntertainmentNews, fetchSportsNews, fetchTechnologyNews, generalURL } from "../apiRequest";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import {
+  fetchBusinessNews,
+  fetchEntertainmentNews,
+  fetchSportsNews,
+  fetchTechnologyNews,
+  generalURL,
+} from "../apiRequest";
 import MainSmallerCards from "../components/MainSmallerCards";
 import CardComponent from "../components/CardComponent";
+import { useSelector } from "react-redux";
 
 function HomePage() {
   const [firstTopNews, setFirstTopNews] = useState({});
@@ -24,35 +38,37 @@ function HomePage() {
   const [international, setInternationalNews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const search = useSelector(state=>state.search)
+
   useEffect(() => {
- 
-    fetchSportsNews()
-    .then((data) => {
-      console.log(data);
+    fetchSportsNews().then((data) => {
+      // console.log(data);
+      data = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }) ;
       setFirstTopNews(data[0]);
       setOtherTopNews(data.slice(1, 5));
-    })
-    
-    fetchTechnologyNews()
-    .then((data) => {
-      console.log(data);
+    });
+
+    fetchTechnologyNews().then((data) => {
+      // console.log(data);
+      data = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }) ;
       setFirstTechnologyNews(data[0]);
       setOtherTechnologyNews(data.slice(1, 5));
-    })
+    });
 
-    fetchBusinessNews()
-    .then((data) => {
-      console.log(data);
+    fetchBusinessNews().then((data) => {
+      // console.log(data);
+      data = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }) ;
       setFirstBusinessNews(data[0]);
       setOtherBusinessNews(data.slice(1, 5));
-    })
+    });
 
-    fetchEntertainmentNews()
-    .then((data) => {
-      console.log(data);
+    fetchEntertainmentNews().then((data) => {
+      // console.log(data);
+      data = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }) ;
       setFirstEntertainmentNews(data[0]);
       setOtherEntertainmentNews(data.slice(1, 5));
-    })
+    });
 
     const fetchPoliticsNews = async () => {
       setLoading(true);
@@ -60,10 +76,10 @@ function HomePage() {
         const response = await fetch(`${generalURL}`);
         const data = await response.json();
         setNationaNews(
-          data.filter((item) => (item.category === "national" ? true : false))
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "national" ? true : false))
         );
         setInternationalNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "international" ? true : false
           )
         );
@@ -74,19 +90,19 @@ function HomePage() {
       }
     };
     fetchPoliticsNews();
-  }, []);
+  }, [search]);
   return (
     <div>
       <Navbar />
-      <Heading
+      { firstTopNews &&  otherTopNews && <Heading
         as="h1"
         size="xl"
         ml={["10px", "50px", "100px"]}
         textDecoration="underline"
       >
         Morning Headlines
-      </Heading>
-      <Grid
+      </Heading>}
+      { firstTopNews &&  otherTopNews && <Grid
         h={["auto", "auto", "400px"]}
         templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
         templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
@@ -106,13 +122,13 @@ function HomePage() {
         >
           <Text
             position={"relative"}
-            top={"70%"}
+            top={"50%"}
             noOfLines={3}
             maxW="calc(100% - 40px)"
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstTopNews?.title}
           </Text>
@@ -121,17 +137,17 @@ function HomePage() {
         {otherTopNews?.map((item, index) => {
           return <MainSmallerCards item={item} key={index} />;
         })}
-      </Grid>
+      </Grid>}
 
-      <Heading
+      { firstTechnologyNews && otherTechnologyNews && <Heading
         as="h1"
         size="xl"
         ml={["10px", "50px", "100px"]}
         textDecoration="underline"
       >
         Breaking News For You - Space
-      </Heading>
-      <Grid
+      </Heading>}
+      { firstTechnologyNews && otherTechnologyNews &&  <Grid
         h={["auto", "auto", "400px"]}
         templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
         templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
@@ -157,7 +173,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstTechnologyNews?.title}
           </Text>
@@ -166,18 +182,17 @@ function HomePage() {
         {otherTechnologyNews?.map((item, index) => {
           return <MainSmallerCards item={item} key={index} />;
         })}
-      </Grid>
+      </Grid>}
 
-
-      <Heading
+      { firstBusinessNews && otherBusinessNews && <Heading
         as="h1"
         size="xl"
         ml={["10px", "50px", "100px"]}
         textDecoration="underline"
       >
         Breaking News For You - Business
-      </Heading>
-      <Grid
+      </Heading>}
+      { firstBusinessNews && otherBusinessNews && <Grid
         h={["auto", "auto", "400px"]}
         templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
         templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
@@ -203,7 +218,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstBusinessNews?.title}
           </Text>
@@ -212,17 +227,17 @@ function HomePage() {
         {otherBusinessNews?.map((item, index) => {
           return <MainSmallerCards item={item} key={index} />;
         })}
-      </Grid>
+      </Grid>}
 
-      <Heading
+      { firstEntertainmentNews && otherEntertainmentNews && <Heading
         as="h1"
         size="xl"
         ml={["10px", "50px", "100px"]}
         textDecoration="underline"
       >
         Breaking News For You - Entertainment
-      </Heading>
-      <Grid
+      </Heading>}
+      { firstEntertainmentNews && otherEntertainmentNews &&  <Grid
         h={["auto", "auto", "400px"]}
         templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
         templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
@@ -248,7 +263,7 @@ function HomePage() {
             p={"10px"}
             color={"white"}
             fontWeight={"bold"}
-            fontSize={["12px", "16px", "18px"]}
+            fontSize={["16px", "20px", "28px"]}
           >
             {firstEntertainmentNews?.title}
           </Text>
@@ -257,50 +272,49 @@ function HomePage() {
         {otherEntertainmentNews?.map((item, index) => {
           return <MainSmallerCards item={item} key={index} />;
         })}
-      </Grid>
-
+      </Grid>}
 
       <Box as="section" py="5" bg="gray.100">
-            <Heading
-              as="h1"
-              size="xl"
-              ml={["10px", "50px", "100px"]}
-              mb="5"
-              textDecoration="underline"
-            >
-              National Headlines
-            </Heading>
-            <SimpleGrid
-              columns={[1, 2, 4]}
-              spacing="20px"
-              px={["10px", "50px", "100px"]}
-            >
-              {national?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
-              })}
-            </SimpleGrid>
-          </Box>
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          National Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {national?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
 
-          <Box as="section" py="5" bg="gray.100">
-            <Heading
-              as="h1"
-              size="xl"
-              ml={["10px", "50px", "100px"]}
-              mb="5"
-              textDecoration="underline"
-            >
-              International Headlines
-            </Heading>
-            <SimpleGrid
-              columns={[1, 2, 4]}
-              spacing="20px"
-              px={["10px", "50px", "100px"]}
-            >
-              {international?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} key={index} />;
-              })}
-            </SimpleGrid>
-          </Box>
+      <Box as="section" py="5" bg="gray.100">
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          International Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {international?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
 
       <Footer />
     </div>

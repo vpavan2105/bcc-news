@@ -6,6 +6,7 @@ import CardComponent from "../components/CardComponent";
 import { generalURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
+import { useSelector } from "react-redux";
 function General() {
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
@@ -17,32 +18,34 @@ function General() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const search = useSelector(state=>state.search)
+
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try {
         const response = await fetch(`${generalURL}`);
         const data = await response.json();
-        const mainSectionDataArr = data.filter((item) =>
+        const mainSectionDataArr = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
           item.category === "top-news" ? true : false
         );
         setFirstTopNews(mainSectionDataArr[0]);
         setOtherTopNews(mainSectionDataArr.slice(1, 5));
         setNationaNews(
-          data.filter((item) => (item.category === "national" ? true : false))
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "national" ? true : false))
         );
         setInternationalNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "international" ? true : false
           )
         );
         setIsraelGazaWarNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "Israel-Gaza-war" ? true : false
           )
         );
         setUkraineWarNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "Ukraine-war" ? true : false
           )
         );
@@ -55,7 +58,7 @@ function General() {
       }
     };
     fetchPoliticsNews();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -66,15 +69,15 @@ function General() {
         <Heading>Error...</Heading>
       ) : (
         <>
-          <Heading
+          {  firstTopNews &&  otherTopNews && <Heading
             as="h1"
             size="xl"
             ml={["10px", "50px", "100px"]}
             textDecoration="underline"
           >
             Morning Headlines
-          </Heading>
-          <Grid
+          </Heading>}
+          {  firstTopNews &&  otherTopNews && <Grid
             h={["auto", "auto", "400px"]}
             templateRows={[
               "repeat(2, 1fr)",
@@ -109,7 +112,7 @@ function General() {
                 p={"10px"}
                 color={"white"}
                 fontWeight={"bold"}
-                fontSize={["12px", "16px", "18px"]}
+                fontSize={["16px", "20px", "28px"]}
               >
                 {firstTopNews?.title}
               </Text>
@@ -118,7 +121,7 @@ function General() {
             {otherTopNews?.map((item, index) => {
               return <MainSmallerCards item={item} key={index} />;
             })}
-          </Grid>
+          </Grid>}
 
           <Box as="section" py="5" bg="gray.100">
             <Heading

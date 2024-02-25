@@ -1,19 +1,18 @@
 import axios from "axios";
 
-export const baseURL = "https://bcc-news-backend.onrender.com/" ;
+export const baseURL = "https://bcc-news-backend.onrender.com" ;
+// https://bcc-news-backend.onrender.com/dashboard
+export const usersURL = `${baseURL}/users` ;
 
-export const usersURL = "https://bcc-news-backend.onrender.com/users" ;
+export const sportsURL = `${baseURL}/sports` ;
+export const entertainmentURL = `${baseURL}/entertainment` ;
+export const businessURL = `${baseURL}/business` ;
+export const scienceURL = `${baseURL}/science` ;
+export const generalURL = `${baseURL}/general` ;
+export const technologyURL = `${baseURL}/technology` ;
+export const politicsURL = `${baseURL}/politics` ;
+export const healthURL = `${baseURL}/entertainment` ;
 
-// export const homeURL = "https://bcc-news-backend.onrender.com/home" ;
-export const sportsURL = "https://bcc-news-backend.onrender.com/sports" ;
-export const entertainmentURL = "https://bcc-news-backend.onrender.com/entertainment" ;
-export const businessURL = "https://bcc-news-backend.onrender.com/business" ;
-export const scienceURL = "https://bcc-news-backend.onrender.com/science" ;
-export const generalURL = "https://bcc-news-backend.onrender.com/general" ;
-export const technologyURL = "https://bcc-news-backend.onrender.com/technology" ;
-export const politicsURL = "https://bcc-news-backend.onrender.com/politics" ;
-export const healthURL = "https://bcc-news-backend.onrender.com/health" ;
-export const dashBoardURL="https://bcc-news-backend.onrender.com/dashboard";
 
 export async function addNewsToBookmark(bookmark,user) {
     try{

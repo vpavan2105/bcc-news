@@ -8,7 +8,7 @@ import { store } from './Redux/store.js'
 import { ChakraProvider } from '@chakra-ui/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
         <Provider store={store} >
@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Provider>
       </BrowserRouter>
     </ChakraProvider>
-  </React.StrictMode>,
+    </React.StrictMode>
 )

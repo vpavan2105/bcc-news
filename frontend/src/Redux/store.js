@@ -1,16 +1,16 @@
 import { applyMiddleware, combineReducers, legacy_createStore  } from 'redux'
 import {thunk} from 'redux-thunk';
+import { BookmarkReducer, LoginReducer, searchReducer } from './reducers'
 
 import { LoginReducer, mainSectionNewsReducer } from './reducers'
 
 const rootReducer = combineReducers({
     login: LoginReducer ,
-    // bookmark: BookmarkReducer,
-    mainSectionNews: mainSectionNewsReducer
+    bookmark: BookmarkReducer,
+    search: searchReducer
 })
+
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 
 
-
-// export const store = legacy_createStore(SceinceReducer, applyMiddleware(thunk));
