@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, legacy_createStore  } from 'redux'
 import {thunk} from 'redux-thunk';
-import {  LoginReducer, searchReducer } from './reducers'
+import {  DashBoardReducer, LoginReducer, searchReducer } from './reducers'
+import DashBoard from '../Pages/DashBoard';
 
 
 const rootReducer = combineReducers({
     login: LoginReducer ,
-    search: searchReducer
+    search: searchReducer,
+    dashboard: DashBoardReducer
 })
 
 

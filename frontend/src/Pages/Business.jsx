@@ -140,7 +140,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {national?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
+                return <CardComponent newsItem={newsItem} key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -161,7 +161,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {international?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
+                return <CardComponent newsItem={newsItem}  key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -182,7 +182,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {stockMarket?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
+                return <CardComponent newsItem={newsItem}  key={index} />;
               })}
             </SimpleGrid>
           </Box>
@@ -204,7 +204,7 @@ function Business() {
               px={["10px", "50px", "100px"]}
             >
               {relatedNews?.map((newsItem, index) => {
-                return <CardComponent newsItem={newsItem} isAuth={isAuth} key={index} />;
+                return <CardComponent newsItem={newsItem}  key={index} />;
               })}
             </SimpleGrid>
           </Box>

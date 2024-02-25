@@ -16,28 +16,22 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewsToBookmark, dashBoardURL } from "../apiRequest";
 
-export default function CardComponent({newsItem,isAuth}) {
+export default function CardComponent({newsItem}) {
   const bookmark  = useSelector( state => state.bookmark ) ;
   const [bookMarkData,setBookmarkData]=useState([]);
+  const isAuth=useSelector(state=>state.login.isAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleNavigation = () => {
     navigate(`/${newsItem.category_section}/${newsItem.id}`);
   };
-  // let user;
-  // try {
-  //   user = JSON.parse(localStorage.getItem('user')) || { }; // Ensure user is an object with a bookmark property
-  // } catch (error) {
-  //     console.error("Error parsing user data from localStorage:", error);
-  //     user = { bookmark: [] }; 
-  // }
 
   const handleAddBookMark = async() => {
     
     let user=JSON.parse(localStorage.getItem('user')) ;
   
 
-      const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user}`)
+      const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user.id}`)
       const addbookmark=response.data.bookmark
      
       console.log(response.data);
@@ -51,7 +45,7 @@ export default function CardComponent({newsItem,isAuth}) {
         // user.bookmark = [...user.bookmark,newsItem] ;
         // localStorage.setItem('user', JSON.stringify(user)) ;
         
-        addNewsToBookmark([...addbookmark,newsItem],user) ;
+        addNewsToBookmark([...addbookmark,newsItem],user.id) ;
         console.log([...addbookmark,newsItem])
       }
       
