@@ -18,39 +18,6 @@ export const LoginReducer = (state = initialLoginState, action) => {
     }
 }
 
-
-const initialstateforScinece = {
-    data: [],
-    loading: false,
-    error: ""
-}
-
-const initialLoginState = {
-    isAuth : false ,
-    token : "" ,
-    userName : ""
-}
-
-
-export const LoginReducer = (state= initialLoginState, action) => {
-    console.log("Reducer is here matter is come")
-
-export const SceinceReducer = (state = initialstateforScinece, action) => {
-    switch (action.type) {
-        case LOADINGDATASCIENCE:
-            return {
-                ...state, loading: true
-            }
-        case SUCCESSDATASCIENCE:
-            return {
-                ...state, loading: false, data:[action.payload]
-            }
-        case FAILUREGDATASCIENCE:
-            return {
-                ...state, loading: false, error:"Somethings went wrong", data:[]
-            }
-    }
-}
 let user;
 try {
     user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
