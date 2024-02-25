@@ -25,32 +25,27 @@ import ContactPage from "./Pages/ContactPage";
 
 function App() {
  
- 
   return (
     <>
-    {/* <AdminPage/> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/signup' element={<SignupForm/> }/>
+
+
+        <Route path="/" element={<HomePage />} />
         <Route path="/sports" element={<Sports />} />
         <Route path="/general" element={<General />} />
         <Route path="/business" element={<Business />} />
         <Route path="/entertainment" element={<Entertainment />} />
         <Route path="/science" element={<Science />} />
         <Route path="/politics" element={<Politics />} />
-        <Route path='/:category/:id' element={<SingleNewsPage/>}/>
         <Route path='/dashboard' element={  <DashBoard/> }/>
         <Route path='/health' element={  <Health/> }/>
-        <Route path='/technology' element={  <Technology/> }/>
-        {/* <Route path='/contact' element={  <Contact/> }/> */}
-        <Route path='/signup' element={  <SignupForm/> }/>
-
-       
-
-        <Route path="/:category/:id" element={<SingleNewsPage />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/health" element={<Health />} />
         <Route path="/technology" element={<Technology />} />
+        <Route path="/health" element={<Health />} />
+        <Route path="/dashboard" element={ <PrivateRoute> <DashBoard /> </PrivateRoute> } />
+
+        <Route path="/:category/:id" element={<SingleNewsPage/>}/>
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </>

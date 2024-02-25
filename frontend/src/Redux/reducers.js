@@ -2,7 +2,7 @@ import { FAILED, LOGIN } from "./actionTypes";
 
 
 const initialLoginState = {
-    isAuth: true,
+    isAuth: false,
     token: "",
     userName: ""
 }
