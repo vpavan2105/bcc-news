@@ -49,6 +49,15 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              {" "}
+              <AdminPage />{" "}
+            </PrivateRoute>
+          }
+        />
 
         <Route path="/:category/:id" element={<SingleNewsPage />} />
         {/* <Route path="/contact" element={<ContactPage />} /> */}
