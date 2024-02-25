@@ -60,9 +60,11 @@ export default function Footer() {
         </Flex>
         <Divider />
         <Flex color="white" justify="space-around" wrap={"wrap"} px={4} py={2}>
-          <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"}>
-            About the BBC
-          </Box>
+          <Link to={"/aboutus"}>
+            <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"}>
+              About the BBC
+            </Box>
+          </Link>
           <Link to={"/contact"}>
             <Box w={{ base: "50px", md: "100px" }} fontSize={"10px"}>
               Contact the BBC
