@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 const ContactFormWrapper = styled.div`
   background-color: #1c2c42;
