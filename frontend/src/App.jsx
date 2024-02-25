@@ -19,6 +19,8 @@ import DashBoard from "./Pages/DashBoard";
 import PrivateRoute from "./Routes/PrivateRoute";
 // import Contact from "./Pages/Contact";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import SignupForm from "./components1/SignUp";
 import ContactPage from "./Pages/ContactPage";
 
 function App() {
@@ -75,10 +77,14 @@ function App() {
       ],
     };
 
+ 
+
+  const isAuth = useSelector(state => state.login.isAuth);
     localStorage.setItem("user", JSON.stringify(dummyuser));
   }, []);
   return (
     <>
+    {/* <AdminPage/> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
@@ -88,6 +94,15 @@ function App() {
         <Route path="/entertainment" element={<Entertainment />} />
         <Route path="/science" element={<Science />} />
         <Route path="/politics" element={<Politics />} />
+        <Route path='/:category/:id' element={<SingleNewsPage/>}/>
+        <Route path='/dashboard' element={  <DashBoard/> }/>
+        <Route path='/health' element={  <Health/> }/>
+        <Route path='/technology' element={  <Technology/> }/>
+        {/* <Route path='/contact' element={  <Contact/> }/> */}
+        <Route path='/signup' element={  <SignupForm/> }/>
+
+       
+
         <Route path="/:category/:id" element={<SingleNewsPage />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/health" element={<Health />} />

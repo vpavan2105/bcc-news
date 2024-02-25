@@ -1,10 +1,13 @@
 // SignupForm.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from "../images/logo.png";
+import Navbar from '../components/Navbar';
 
  function  SignupForm () {
   const [username, setusername]=useState();
   const [password, setpassword]=useState();
-
+  const nevigate = useNavigate();
 
 
   let url =`https://bcc-news-backend.onrender.com/users`;
@@ -24,84 +27,92 @@ import React, { useState } from 'react';
     .then((res)=>{
       return res.json()
     })
-    .catch((data)=>{
+    .then((data)=>{
       console.log(data);
+      nevigate("/login")
     })
     .catch(error=>{
       console.log(error)
   })
   }
  console.log("signuprender")
+//  <img src={logo} alt="Logo" className="mx-auto mb-4" style={{ maxWidth: '100px' }} />
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
-      
-      <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-600">
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-         
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-        
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-       
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-600">
-            Create Username
-          </label>
-          <input
-            type="text"
-            id="password"
-            name="password"
-          
-           
-            onChange={(e)=>{setusername(e.target.value)}}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-600">
+    <>
+    <Navbar/>
+    <div className="max-w-ld mx-auto">
+  <div
+    className="max-w-full mx-auto mt-8 p-6 bg-opacity-80 bg-cover bg-center bg-white shadow-md rounded-md text-center"
+    style={{ backgroundImage: 'url("https://t4.ftcdn.net/jpg/03/67/85/53/360_F_367855342_hC9tRkea0aqxsyqfOzBwjc9Tv3jiSmNz.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}
+  >
+    <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="mb-3">
+        <label htmlFor="fullName" className="block text-sm font-bold text-gray-600">
+          Full Name
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          className="mt-1 p-2 w-1/3 border rounded-md bg-gray-200"
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="email" className="block text-sm font-bold text-gray-600">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          className="mt-1 p-2 w-1/3 border rounded-md bg-gray-200"
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="block text-sm font-bold text-gray-600">
+          Create Username
+        </label>
+        <input
+          type="text"
+          id="password"
+          name="password"
+          onChange={(e) => setusername(e.target.value)}
+          className="mt-1 p-2 w-1/3 border rounded-md bg-gray-200"
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="mobileNumber" className="block text-sm font-bold text-gray-600">
           Create Password
-          </label>
-          <input
-            type="password"
-            id="mobileNumber"
-            name="mobileNumber"
-            // value={formData.mobileNumber}
-            onChange={(e)=>{setpassword(e.target.value)}}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-        >
-          Sign Up
-        </button>
-      </form>
-    </div>
+        </label>
+        <input
+          type="password"
+          id="mobileNumber"
+          name="mobileNumber"
+          onChange={(e) => setpassword(e.target.value)}
+          className="mt-1 p-2 w-1/3 border rounded-md bg-gray-200"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="bg-black text-white py-2 px-4 rounded-md hover:bg-gray-900 focus:outline-none focus:ring focus:border-gray-700"
+      >
+        Sign Up
+      </button>
+    </form>
+    <p className="mt-4 text-gray-600 font-bold">
+      Already have an account? <a href="#" className="text-blue-500 hover:underline font-bold">Sign In</a>
+    </p>
+  </div>
+</div>
+
+</>
+
   );
 };
   
