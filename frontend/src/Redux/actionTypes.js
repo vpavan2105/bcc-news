@@ -1,5 +1,4 @@
-// action types for science page
-
-export const LOADINGDATASCIENCE="LOADINGDATASCIENCE";
-export const SUCCESSDATASCIENCE="SUCCESSDATASCIENCE";
-export const FAILUREGDATASCIENCE="FAILUREGDATASCIENCE";
+//login action type//
+export const  LOGIN="LOGIN";
+export const LOGOUT="LOGOUT";
+export const FAILED="FAILED";

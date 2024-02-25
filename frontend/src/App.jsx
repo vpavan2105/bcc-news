@@ -64,6 +64,7 @@ function App() {
         } 
       ]
     };
+    
 
     localStorage.setItem("user",JSON.stringify(dummyuser))
   },[])
@@ -84,6 +85,7 @@ function App() {
         <Route path='/technology' element={  <Technology/> }/>
         {/* <Route path='/contact' element={  <Contact/> }/> */}
       </Routes>
+    
     </>
   )
 }
