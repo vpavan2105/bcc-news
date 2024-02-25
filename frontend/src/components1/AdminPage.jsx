@@ -12,7 +12,7 @@ export function AdminPage() {
 
 
 
-    const sceincedatautl=`https://testing-arqw.onrender.com/${endpoint}`
+    const sceincedatautl=`https://bcc-news-backend.onrender.com/${endpoint}`
     console.log(sceincedatautl)
 
     function updateData(e){
