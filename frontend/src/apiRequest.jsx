@@ -14,24 +14,25 @@ export const politicsURL = `${baseURL}/politics` ;
 export const healthURL = `${baseURL}/entertainment` ;
 export const dashBoardURL = `${baseURL}/dashboard`;
 
-export async function addNewsToBookmark(bookmark,user) {
+export async function addNewsToBookmark(bookmark,id) {
     try{
-        let res = await axios.patch(`${dashBoardURL}/${user}`,{
+        let res = await axios.patch(`${dashBoardURL}/${id}`,{
             bookmark
         })
-  
         // let data = await res.json() ;
         console.log(res) ;
-     
     }catch(error){
         console.log(error) ;
     }
 }
 
-export async function deleteNewsFromBookmark(newsItemId, userId) {
+export async function deleteNewsFromBookmark(updatedBookMarkedList, userId) {
     try {
-        let res = await axios.delete(`${usersURL}/${userId}/bookmark/${newsItemId}`);
-        console.log(res);
+        let res = await axios.patch(`${dashBoardURL}/${userId}`,{
+          bookmark:updatedBookMarkedList 
+        });
+        let data = res.data;
+        console.log(data);
     } catch (error) {
         console.log(error);
     }
