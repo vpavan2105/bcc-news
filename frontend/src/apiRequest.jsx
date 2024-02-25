@@ -12,7 +12,7 @@ export const generalURL = `${baseURL}/general` ;
 export const technologyURL = `${baseURL}/technology` ;
 export const politicsURL = `${baseURL}/politics` ;
 export const healthURL = `${baseURL}/entertainment` ;
-
+export const dashBoardURL = `${baseURL}/dashboard`;
 
 export async function addNewsToBookmark(bookmark,user) {
     try{
