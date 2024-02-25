@@ -7,8 +7,8 @@ import { LoginReducer } from './reducers'
 
 const rootReducer = combineReducers({
     login: LoginReducer ,
-    // bookmark: BookmarkReducer,
-    // mainSectionNews: mainSectionNewsReducer
+    //  bookmark: BookmarkReducer,
+    //  mainSectionNews: mainSectionNewsReducer
 })
 
 

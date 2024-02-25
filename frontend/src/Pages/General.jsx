@@ -1,12 +1,14 @@
 import Navbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import { Divider, SimpleGrid } from "@chakra-ui/react";
+import {  Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
 import { generalURL } from "../apiRequest";
 import Footer from "../components/Footer";
+import MainSmallerCards from "../components/MainSmallerCards";
 function General() {
-  const [topNews, setTopNews] = useState([]);
+  const [firstTopNews, setFirstTopNews] = useState({});
+  const [otherTopNews, setOtherTopNews] = useState([]);
   const [national, setNationaNews] = useState([]);
   const [international, setInternationalNews] = useState([]);
   const [IsraelGazaWar, setIsraelGazaWarNews] = useState([]);
@@ -18,22 +20,39 @@ function General() {
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       setLoading(true);
-      try{
+      try {
         const response = await fetch(`${generalURL}`);
         const data = await response.json();
-        setTopNews(data.filter( item => item.category === "top-news" ? true:false ) )
-        setNationaNews(data.filter( item => item.category === "national" ? true:false ) )
-        setInternationalNews(data.filter( item => item.category === "international" ? true:false ) )
-        setIsraelGazaWarNews(data.filter( item => item.category === "Israel-Gaza-war" ? true:false ) )
-        setUkraineWarNews(data.filter( item => item.category === "Ukraine-war" ? true:false ) )
+        const mainSectionDataArr = data.filter((item) =>
+          item.category === "top-news" ? true : false
+        );
+        setFirstTopNews(mainSectionDataArr[0]);
+        setOtherTopNews(mainSectionDataArr.slice(1, 5));
+        setNationaNews(
+          data.filter((item) => (item.category === "national" ? true : false))
+        );
+        setInternationalNews(
+          data.filter((item) =>
+            item.category === "international" ? true : false
+          )
+        );
+        setIsraelGazaWarNews(
+          data.filter((item) =>
+            item.category === "Israel-Gaza-war" ? true : false
+          )
+        );
+        setUkraineWarNews(
+          data.filter((item) =>
+            item.category === "Ukraine-war" ? true : false
+          )
+        );
         console.log(data);
         setLoading(false);
       } catch (error) {
-        console.log(error) ;
+        console.log(error);
         setLoading(false);
         setError(true);
       }
-      
     };
     fetchPoliticsNews();
   }, []);
@@ -42,98 +61,151 @@ function General() {
     <>
       <Navbar />
       {loading ? (
-          <Heading>Loading...</Heading>
-        ) : error ? (
-          <Heading>Error...</Heading>
-        ) : ( <>
-              <Box as="section" py="5" bg="gray.100">
-                <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
-                  textDecoration="underline"
-                >
-                  Top News
-                </Heading>
-                <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {topNews?.map((newsItem, index) => {
-                    return <CardComponent newsItem={newsItem} key={index} />
-                  })}
-                </SimpleGrid>
-              </Box>
+        <Heading>Loading...</Heading>
+      ) : error ? (
+        <Heading>Error...</Heading>
+      ) : (
+        <>
+          <Heading
+            as="h1"
+            size="xl"
+            ml={["10px", "50px", "100px"]}
+            textDecoration="underline"
+          >
+            Morning Headlines
+          </Heading>
+          <Grid
+            h={["auto", "auto", "400px"]}
+            templateRows={[
+              "repeat(2, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(2, 1fr)",
+            ]} // Adjusting row count for responsiveness
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(4, 1fr)",
+            ]} // Adjusting column count for responsiveness
+            gap={4}
+            px={["10px", "50px", "100px"]}
+            py={["10px", "20px", "30px"]}
+          >
+            <GridItem
+              rowSpan={[1, 1, 2]}
+              colSpan={[1, 1, 2]}
+              overflow="hidden"
+              cursor={"pointer"}
+              borderRadius={"10px"}
+              backgroundImage={`url(${firstTopNews.urlToImage})`}
+              // backgroundImage={"url(https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg)"}
+              backgroundSize="cover"
+              backgroundPosition="center"
+            >
+              <Text
+                position={"relative"}
+                top={"70%"}
+                noOfLines={3}
+                maxW="calc(100% - 40px)"
+                p={"10px"}
+                color={"white"}
+                fontWeight={"bold"}
+                fontSize={["16px", "20px", "28px"]}
+              >
+                {firstTopNews?.title}
+              </Text>
+            </GridItem>
 
-              <Box as="section" py="5" bg="gray.100">
-                <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
-                  textDecoration="underline"
-                >
-                  National Headlines
-                </Heading>
-                <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {national?.map((newsItem, index) => {
-                    return <CardComponent newsItem={newsItem} key={index} />
-                  })}
-                </SimpleGrid>
-              </Box>
+            {otherTopNews?.map((item, index) => {
+              return <MainSmallerCards item={item} key={index} />;
+            })}
+          </Grid>
 
-              <Box as="section" py="5" bg="gray.100">
-                <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
-                  textDecoration="underline"
-                >
-                  International Headlines
-                </Heading>
-                <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {international?.map((newsItem, index) => {
-                    return <CardComponent newsItem={newsItem} key={index} />
-                  })}
-                </SimpleGrid>
-              </Box>
+          <Box as="section" py="5" bg="gray.100">
+            <Heading
+              as="h1"
+              size="xl"
+              ml={["10px", "50px", "100px"]}
+              mb="5"
+              textDecoration="underline"
+            >
+              National Headlines
+            </Heading>
+            <SimpleGrid
+              columns={[1, 2, 4]}
+              spacing="20px"
+              px={["10px", "50px", "100px"]}
+            >
+              {national?.map((newsItem, index) => {
+                return <CardComponent newsItem={newsItem} key={index} />;
+              })}
+            </SimpleGrid>
+          </Box>
 
-              <Box as="section" py="5" bg="gray.100">
-                <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
-                  textDecoration="underline"
-                >
-                  Israel Gaza War
-                </Heading>
-                <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {IsraelGazaWar?.map((newsItem, index) => {
-                    return <CardComponent newsItem={newsItem} key={index} />
-                  })}
-                </SimpleGrid>
-              </Box>
+          <Box as="section" py="5" bg="gray.100">
+            <Heading
+              as="h1"
+              size="xl"
+              ml={["10px", "50px", "100px"]}
+              mb="5"
+              textDecoration="underline"
+            >
+              International Headlines
+            </Heading>
+            <SimpleGrid
+              columns={[1, 2, 4]}
+              spacing="20px"
+              px={["10px", "50px", "100px"]}
+            >
+              {international?.map((newsItem, index) => {
+                return <CardComponent newsItem={newsItem} key={index} />;
+              })}
+            </SimpleGrid>
+          </Box>
 
-              <Box as="section" py="5" bg="gray.100">
-                <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
-                  textDecoration="underline"
-                >
-                  Ukraine War
-                </Heading>
-              
-                <SimpleGrid
-                  columns={[1, 2, 4]}
-                  spacing="20px"
-                  px={["10px", "50px", "100px"]}
-                >
-                  {UkraineWar?.map((newsItem, index) => {
-                    return <CardComponent newsItem={newsItem} key={index} />
-                  })}
-                </SimpleGrid>
-              </Box>
-              </>
-        )
-      }
+          <Box as="section" py="5" bg="gray.100">
+            <Heading
+              as="h1"
+              size="xl"
+              ml={["10px", "50px", "100px"]}
+              mb="5"
+              textDecoration="underline"
+            >
+              Israel Gaza War
+            </Heading>
+            <SimpleGrid
+              columns={[1, 2, 4]}
+              spacing="20px"
+              px={["10px", "50px", "100px"]}
+            >
+              {IsraelGazaWar?.map((newsItem, index) => {
+                return <CardComponent newsItem={newsItem} key={index} />;
+              })}
+            </SimpleGrid>
+          </Box>
+
+          <Box as="section" py="5" bg="gray.100">
+            <Heading
+              as="h1"
+              size="xl"
+              ml={["10px", "50px", "100px"]}
+              mb="5"
+              textDecoration="underline"
+            >
+              Ukraine War
+            </Heading>
+
+            <SimpleGrid
+              columns={[1, 2, 4]}
+              spacing="20px"
+              px={["10px", "50px", "100px"]}
+            >
+              {UkraineWar?.map((newsItem, index) => {
+                return <CardComponent newsItem={newsItem} key={index} />;
+              })}
+            </SimpleGrid>
+          </Box>
+        </>
+      )}
       <Footer />
     </>
   );

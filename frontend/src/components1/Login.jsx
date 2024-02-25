@@ -1,7 +1,9 @@
+
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import logo from "../images/logo.png";
+ import logo from "../images/logo.png";
 import SignupForm from './SignUp';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { loginhandler } from '../Redux/actionCreator';
 import { useToast } from '@chakra-ui/react';
@@ -25,8 +27,7 @@ function handlelogin(e) {
 
 
     dispatch(loginhandler({ username, password }));
-    setusername("")
-    setpassword("")
+ 
 }
 const toast = useToast()
 

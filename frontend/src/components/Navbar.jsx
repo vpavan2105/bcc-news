@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import logo from "../images/logo.png";
 import user from "../images/user.png";
 import lens from "../images/lens.png";
@@ -10,102 +10,105 @@ export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useSelector((state) => state);
+  const [showMenu, setShowMenu] = useState(false);
+
   const handleLogout = () => {
     dispatch(LogoutAction());
   };
+
   const handleLogin = () => {
     navigate("/login");
   };
 
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
-    <div className="grid grid-cols-3 bg-black text-white sticky top-0 z-20">
-      <div className="flex align-center p-2">
-        <img src={logo} className="h-10" />
-        {login.isAuth ? (
-          <button
-            onClick={handleLogout}
-            className="text-white flex hover:underline p-2"
-          >
-            Logout
-          </button>
-        ) : (
-          <Link to="/login">
-            <button
-              onClick={handleLogin}
-              className="text-white flex hover:underline  p-2 w-30"
-            >
-              <img src={user} className="h-7" />
+    <div className="bg-black text-white sticky top-0 z-20 w-full">
+      <div className="container mx-auto flex justify-between items-center p-4">
+        <div className="flex items-center">
+          <img src={logo} className="h-10" alt="Logo" />
+          <img src={lens} className="h-6 ml-4" alt="Lens" />
+          <input
+            className="ml-2 bg-black"
+            placeholder="Search BBC"
+            style={{
+              // border: "1px solid white",
+              color: "white",
+              borderRadius: "14px",
+              paddingTop: "5px",
+              paddingBottom: "4px",
+              paddingLeft: "2.5px",
+            }}
+          />
+        </div>
+
+        <div
+          className="hidden md:flex items-center space-x-4 flex-grow"
+          style={{ justifyContent: "space-around", fontWeight: "bold" }}
+        >
+          <Link to={"/"}>Home</Link>
+          <Link to={"/general"}>General</Link>
+          <Link to={"/sports"}>Sports</Link>
+          <Link to={"/entertainment"}>Entertainment</Link>
+          <Link to={"/politics"}>Politics</Link>
+          <Link to={"/business"}>Business</Link>
+          <Link to={"/science"}>Science</Link>
+          <Link to={"/dashboard"}>Dashboard</Link>
+
+          {login.isAuth ? (
+            <button onClick={handleLogout}>Logout</button>
+          ) : (
+            <button onClick={handleLogin}>
+              <img src={user} alt="User" className="h-7" />
               Sign in
             </button>
-          </Link>
-        )}
+          )}
+        </div>
+
+        {/* Hamburger menu for smaller screens */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
-      <div className="flex justify-center align-center mt-4">
-        <Link to={"/"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Home
-          </button>
-        </Link>
-        <Link to={"/general"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            General
-          </button>
-        </Link>
-        <Link to={"/sports"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Sports
-          </button>
-        </Link>
-        <Link to={"/entertainment"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Entertainment
-          </button>
-        </Link>
-        <Link to={"/politics"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Politics
-          </button>
-        </Link>
-        <Link to={"/business"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Business
-          </button>
-        </Link>
-        <Link to={"/technology"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Technology
-          </button>
-        </Link>
-        <Link to={"/science"}>
-          <button
-            className="mr-7 font-semibold text-sm"
-          >
-            Science
-          </button>
-        </Link>
-      </div>
-      <div className="ml-40 flex p-4">
-        <img src={lens} className="h-6" />
-        <input
-          // onChange={(e) => props.setSearch(e.target.value)}
-          className="flex bg-black"
-          placeholder="Search BBC"
-        />
-      </div>
+
+      {/* Responsive menu */}
+      {showMenu && (
+        <div className="md:hidden bg-black p-4 text-center w-full">
+          <div className="flex flex-col space-y-2">
+            <Link to={"/"}>Home</Link>
+            <Link to={"/general"}>General</Link>
+            <Link to={"/sports"}>Sports</Link>
+            <Link to={"/entertainment"}>Entertainment</Link>
+            <Link to={"/politics"}>Politics</Link>
+            <Link to={"/business"}>Business</Link>
+            <Link to={"/science"}>Science</Link>
+            <Link to={"/dashboard"}>Dashboard</Link>
+          </div>
+
+          {login.isAuth ? (
+            <button onClick={handleLogout}>Logout</button>
+          ) : (
+            <button onClick={handleLogin}>Sign in</button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

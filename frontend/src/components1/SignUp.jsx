@@ -1,7 +1,7 @@
 // SignupForm.js
 import React, { useState } from 'react';
 
-const SignupForm = () => {
+ function  SignupForm () {
   const [username, setusername]=useState();
   const [password, setpassword]=useState();
 
@@ -104,5 +104,5 @@ const SignupForm = () => {
     </div>
   );
 };
-
+  
 export default SignupForm;

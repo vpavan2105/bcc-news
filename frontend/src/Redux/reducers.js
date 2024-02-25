@@ -1,10 +1,20 @@
 import { FAILED, LOGIN } from "./actionTypes";
 
+
+
+
+const initialstateforScinece = {
+    data: [],
+    loading: false,
+    error: ""
+}
+
 const initialLoginState = {
     isAuth : false ,
     token : "" ,
     userName : ""
 }
+
 
 export const LoginReducer = (state= initialLoginState, action) => {
     console.log("Reducer is here matter is come")

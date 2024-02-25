@@ -1,61 +1,316 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import {
+  fetchBusinessNews,
+  fetchEntertainmentNews,
+  fetchSportsNews,
+  fetchTechnologyNews,
+  generalURL,
+} from "../apiRequest";
+import MainSmallerCards from "../components/MainSmallerCards";
+import CardComponent from "../components/CardComponent";
 
+function HomePage() {
+  const [firstTopNews, setFirstTopNews] = useState({});
+  const [otherTopNews, setOtherTopNews] = useState([]);
 
-function HomePage(props) {
+  const [firstTechnologyNews, setFirstTechnologyNews] = useState({});
+  const [otherTechnologyNews, setOtherTechnologyNews] = useState([]);
 
-    // const [news, setNews] = useState([])
+  const [firstBusinessNews, setFirstBusinessNews] = useState({});
+  const [otherBusinessNews, setOtherBusinessNews] = useState([]);
 
-    // const addNews = async(data) =>{
-    //     const newsDoc = doc(database,"News",`${data.url.substr(-10,10)}`)
-    //     try{
-    //         await setDoc(newsDoc,{
-    //             title:data.title,
-    //             description:data.description
-    //         })
-    //     }catch(err){
-    //         console.error(err)
-    //     }
-    // }
+  const [firstEntertainmentNews, setFirstEntertainmentNews] = useState({});
+  const [otherEntertainmentNews, setOtherEntertainmentNews] = useState([]);
 
+  const [national, setNationaNews] = useState([]);
+  const [international, setInternationalNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    fetchSportsNews().then((data) => {
+      console.log(data);
+      setFirstTopNews(data[0]);
+      setOtherTopNews(data.slice(1, 5));
+    });
 
+    fetchTechnologyNews().then((data) => {
+      console.log(data);
+      setFirstTechnologyNews(data[0]);
+      setOtherTechnologyNews(data.slice(1, 5));
+    });
 
-    // const getNews = () => {
-    //     fetch(`https://newsapi.org/v2/everything?q=${props.menu ? props.menu : "All"}&sortBy=popularity&apiKey=5c72f98ae15346cc833605f485d65a45`)
-    //         .then(res => res.json())
-    //         .then(json => setNews(json.articles))
-    // }
+    fetchBusinessNews().then((data) => {
+      console.log(data);
+      setFirstBusinessNews(data[0]);
+      setOtherBusinessNews(data.slice(1, 5));
+    });
 
+    fetchEntertainmentNews().then((data) => {
+      console.log(data);
+      setFirstEntertainmentNews(data[0]);
+      setOtherEntertainmentNews(data.slice(1, 5));
+    });
 
-    // useEffect(() => {
-    //     getNews()
-    // }, [props.menu])
+    const fetchPoliticsNews = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${generalURL}`);
+        const data = await response.json();
+        setNationaNews(
+          data.filter((item) => (item.category === "national" ? true : false))
+        );
+        setInternationalNews(
+          data.filter((item) =>
+            item.category === "international" ? true : false
+          )
+        );
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+        setError(true);
+      }
+    };
+    fetchPoliticsNews();
+  }, []);
+  return (
+    <div>
+      <Navbar />
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Morning Headlines
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstTopNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"50%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["16px", "20px", "28px"]}
+          >
+            {firstTopNews?.title}
+          </Text>
+        </GridItem>
 
+        {otherTopNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
 
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Breaking News For You - Space
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstTechnologyNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"70%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["16px", "20px", "28px"]}
+          >
+            {firstTechnologyNews?.title}
+          </Text>
+        </GridItem>
 
-    return (<>
-        <Navbar />
-        <Footer/>
-        {/* <div className='mt-12 p-5 grid grid-cols-4'>
-            {news?.filter(data => data.title.includes(props.search)).map((data) => {
-                return <>
-                    <Link onClick={()=>addNews(data)} to="/details" state={{data:data}}><div class="max-w-sm rounded overflow-hidden shadow-lg">
-                        <img className="w-full" src={data.urlToImage} alt="Sunset in the mountains" />
-                        <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">{data.title}</div>
-                            <p className="text-gray-700 text-base">
-                               {data.content}
-                            </p>
-                        </div>
-                    </div>
-                    </Link>
-                </>
-            })}
-        </div> */}
-        </>
-    )
+        {otherTechnologyNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
+
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Breaking News For You - Business
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstBusinessNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"70%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["16px", "20px", "28px"]}
+          >
+            {firstBusinessNews?.title}
+          </Text>
+        </GridItem>
+
+        {otherBusinessNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
+
+      <Heading
+        as="h1"
+        size="xl"
+        ml={["10px", "50px", "100px"]}
+        textDecoration="underline"
+      >
+        Breaking News For You - Entertainment
+      </Heading>
+      <Grid
+        h={["auto", "auto", "400px"]}
+        templateRows={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)"]} // Adjusting row count for responsiveness
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]} // Adjusting column count for responsiveness
+        gap={4}
+        px={["10px", "50px", "100px"]}
+        py={["10px", "20px", "30px"]}
+      >
+        <GridItem
+          rowSpan={[1, 1, 2]}
+          colSpan={[1, 1, 2]}
+          overflow="hidden"
+          cursor={"pointer"}
+          borderRadius={"10px"}
+          backgroundImage={`url(${firstEntertainmentNews.urlToImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Text
+            position={"relative"}
+            top={"70%"}
+            noOfLines={3}
+            maxW="calc(100% - 40px)"
+            p={"10px"}
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={["16px", "20px", "28px"]}
+          >
+            {firstEntertainmentNews?.title}
+          </Text>
+        </GridItem>
+
+        {otherEntertainmentNews?.map((item, index) => {
+          return <MainSmallerCards item={item} key={index} />;
+        })}
+      </Grid>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          National Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {national?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Box as="section" py="5" bg="gray.100">
+        <Heading
+          as="h1"
+          size="xl"
+          ml={["10px", "50px", "100px"]}
+          mb="5"
+          textDecoration="underline"
+        >
+          International Headlines
+        </Heading>
+        <SimpleGrid
+          columns={[1, 2, 4]}
+          spacing="20px"
+          px={["10px", "50px", "100px"]}
+        >
+          {international?.map((newsItem, index) => {
+            return <CardComponent newsItem={newsItem} key={index} />;
+          })}
+        </SimpleGrid>
+      </Box>
+
+      <Footer />
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;

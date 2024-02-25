@@ -39,5 +39,24 @@ let url = `https://testing-arqw.onrender.com/users`
     
 
 
-
+const sceincedatautl=`https://red-powerful-snail.cyclic.app/science`;
+export const scienceData = () => {
+    return async (dispatch) => {
+        console.log("data")
+      dispatch({type:LOADINGDATASCIENCE});
+  
+      try {
+        // Your asynchronous logic goes here
+        const  data=await axios.get(sceincedatautl);
+        console.log(data)
+        dispatch({type:SUCCESSDATASCIENCE , payload:data});
+  
+      } catch (error) {
+      dispatch({type:FAILUREGDATASCIENCE})
+  
+      }
+    };
+  };
+  
+  
 
