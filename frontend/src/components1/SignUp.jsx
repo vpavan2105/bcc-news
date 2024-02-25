@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 
 
-  let url =`https://testing-arqw.onrender.com/users`;
+  let url =`https://bcc-news-backend.onrender.com/users`;
 
   function handleSubmit(e){
     e.preventDefault();

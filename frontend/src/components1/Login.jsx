@@ -15,7 +15,9 @@ function Login() {
     const [password, setpassword]=useState();
     const[state1, setState]=useState(false)
 
-    let url=`https://testing-arqw.onrender.com/users`;
+    
+
+    let url=`https://bcc-news-backend.onrender.com/users`;
 
 const dispatch=useDispatch()
 const state=useSelector(state=>state);
@@ -38,7 +40,7 @@ useEffect(() => {
               title: 'Login Successful',
               description: 'Welcome back!',
               status: 'success',
-              duration: 3000,
+              duration: 2000,
               isClosable: true,
             });
           } else if (state.login.isAuth==false) {
@@ -46,7 +48,7 @@ useEffect(() => {
               title: 'Login Failed',
               description: 'User does not exist.',
               status: 'error',
-              duration: 3000,
+              duration: 2000,
               isClosable: true,
             });
           }

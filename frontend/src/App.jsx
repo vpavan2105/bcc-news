@@ -64,6 +64,7 @@ function App() {
         } 
       ]
     };
+    
 
     localStorage.setItem("user",JSON.stringify(dummyuser))
   },[])
