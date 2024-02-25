@@ -13,6 +13,7 @@ import CardComponent from "../components/CardComponent";
 import { sportsURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
+import { useSelector } from "react-redux";
 
 export default function Sports() {
   const [firstTopNews, setFirstTopNews] = useState({});
@@ -25,28 +26,30 @@ export default function Sports() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const search = useSelector(state=>state.search)
+
   const fetchrenderData = async () => {
     setLoading(true);
     try {
       let res = await fetch(`${sportsURL}`);
       let data = await res.json();
       console.log(data);
-      const mainSectionDataArr = data.filter((item) =>
+      const mainSectionDataArr = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
         item.category === "top-news" ? true : false
       );
       setFirstTopNews(mainSectionDataArr[0]);
       setOtherTopNews(mainSectionDataArr.slice(1, 5));
       setCricket(
-        data.filter((item) => (item.category === "cricket" ? true : false))
+        data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "cricket" ? true : false))
       );
       setFootball(
-        data.filter((item) => (item.category === "football" ? true : false))
+        data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "football" ? true : false))
       );
       setBasketball(
-        data.filter((item) => (item.category === "basketball" ? true : false))
+        data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "basketball" ? true : false))
       );
       setExtraSports(
-        data.filter((item) => (item.category === "extra-sports" ? true : false))
+        data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "extra-sports" ? true : false))
       );
       setLoading(false);
     } catch (err) {
@@ -57,7 +60,7 @@ export default function Sports() {
 
   useEffect(() => {
     fetchrenderData();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -68,15 +71,15 @@ export default function Sports() {
         <Heading>Error...</Heading>
       ) : (
         <>
-          <Heading
+          { firstTopNews && otherTopNews && <Heading
             as="h1"
             size="xl"
             ml={["10px", "50px", "100px"]}
             textDecoration="underline"
           >
             Morning Headlines
-          </Heading>
-          <Grid
+          </Heading>}
+          { firstTopNews && otherTopNews && <Grid
             h={["auto", "auto", "400px"]}
             templateRows={[
               "repeat(2, 1fr)",
@@ -120,7 +123,7 @@ export default function Sports() {
             {otherTopNews?.map((item, index) => {
               return <MainSmallerCards item={item} key={index} />;
             })}
-          </Grid>
+          </Grid>}
 
           <Box as="section" py="5" bg="gray.100">
             <Heading

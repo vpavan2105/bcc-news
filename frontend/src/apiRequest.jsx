@@ -1,18 +1,17 @@
 import axios from "axios";
 
-export const baseURL = "https://testing-arqw.onrender.com/" ;
+export const baseURL = "https://bcc-news-backend.onrender.com" ;
+// https://bcc-news-backend.onrender.com/dashboard
+export const usersURL = `${baseURL}/users` ;
 
-export const usersURL = "https://testing-arqw.onrender.com/users" ;
-
-// export const homeURL = "https://testing-arqw.onrender.com/home" ;
-export const sportsURL = "https://testing-arqw.onrender.com/sports" ;
-export const entertainmentURL = "https://testing-arqw.onrender.com/entertainment" ;
-export const businessURL = "https://testing-arqw.onrender.com/business" ;
-export const scienceURL = "https://testing-arqw.onrender.com/science" ;
-export const generalURL = "https://testing-arqw.onrender.com/general" ;
-export const technologyURL = "https://testing-arqw.onrender.com/technology" ;
-export const politicsURL = "https://testing-arqw.onrender.com/politics" ;
-export const healthURL = "https://testing-arqw.onrender.com/health" ;
+export const sportsURL = `${baseURL}/sports` ;
+export const entertainmentURL = `${baseURL}/entertainment` ;
+export const businessURL = `${baseURL}/business` ;
+export const scienceURL = `${baseURL}/science` ;
+export const generalURL = `${baseURL}/general` ;
+export const technologyURL = `${baseURL}/technology` ;
+export const politicsURL = `${baseURL}/politics` ;
+export const healthURL = `${baseURL}/entertainment` ;
 
 
 export async function addNewsToBookmark(newsItem,user) {

@@ -50,8 +50,8 @@ export default function Footer() {
                 </Link>
             </Box>
             <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
-                <Link to={"/"}>
-                    Earth
+                <Link to={"/technology"}>
+                    Technology
                 </Link>
             </Box>
             <Box w={{ base: "100px", md: "180px" }}  mb={2} fontSize={"14px"} >
