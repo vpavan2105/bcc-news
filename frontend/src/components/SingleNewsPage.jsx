@@ -29,7 +29,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faThumbsUp,faEnvelope, faShare} from "@fortawesome/free-solid-svg-icons";
+import { faComment, faThumbsUp, faShare} from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp,faInstagram ,faTwitter,faFacebook, faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -48,11 +48,12 @@ export default function SingleNewsPage() {
   const [colorComment, setColorComment] = useState("lightblue");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const [randomNews, setRandomNews] = useState([]);
+  
   ///// userparams
+  let user=JSON.parse(localStorage.getItem('user')) ;
   useEffect(() => {
     axios
-      .get(`${baseURL}/${category}/${id}`)
+      .get(`${baseURL}/${category}/${user.id}`)
       .then((res) => res.data)
       .then((data) => setSingleNews(data));
 
@@ -63,15 +64,15 @@ export default function SingleNewsPage() {
     e.preventDefault();
   if(comment!=""){
     axios
-      .get(`${baseURL}/${category}/${id}`)
+      .get(`${baseURL}/${category}/${user.id}`)
       .then((res) => res.data)
       .then((data) => {
         const updateComment = [
           ...data.comments,
-          { user: "pavan", comment: comment },
+          { user: user.username, comment: comment },
         ];
         axios
-          .patch(`https://testing-arqw.onrender.com/${category}/${id}`, {
+          .patch(`${baseURL}/${category}/${user.id}`, {
             comments: updateComment,
           })
           .then((response) => {
@@ -99,7 +100,7 @@ export default function SingleNewsPage() {
     if (selectedIcon) {
       toast({
         title: "Message Sent Successfully",
-        description: `Your message has been sent via ${selectedIcon.name}.`,
+        description: `Your message has been sent .`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -149,7 +150,7 @@ export default function SingleNewsPage() {
     <>
       <Navbar />
       <Card borderRadius="md" height={"auto"} marginTop={"12px"}>
-        <Flex direction="column" m="auto">
+        <Flex direction="column" m="auto" >
           <CardHeader boxShadow={" rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;"}>
             <Heading as="h2" size="md" mb="2" color={"blue"}>
               {singleNews.title}
@@ -194,12 +195,14 @@ export default function SingleNewsPage() {
             </Flex>
           </CardBody>
 
-          <Flex align="center" mt="4">
+          <Flex align="center" mt="4" gap={'16px'} marginBottom={'200px'} justify={'center'}>
             <Button
               flex="1"
+             
               backgroundColor={"white"}
               _hover={"backgroundColor:none"}
               onClick={handleLike}
+              border={'1px solid'}
             >
               <FontAwesomeIcon
                 icon={faThumbsUp}
@@ -214,7 +217,7 @@ export default function SingleNewsPage() {
                   flex="1"
                   backgroundColor={"white"}
                   _hover={"backgroundColor:none"}
-                  
+                  border={'1px solid'}
                 >
                   <FontAwesomeIcon
                     icon={faComment}
@@ -253,6 +256,7 @@ export default function SingleNewsPage() {
                       placeholder="Enter comment.."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
+                      
                     />
                     <InputRightElement width="4.5rem">
                       <Button
@@ -269,7 +273,7 @@ export default function SingleNewsPage() {
               </PopoverContent>
             </Popover>
             <Button flex="1" onClick={onOpen}  backgroundColor={"white"}
-                  _hover={"backgroundColor:none"}>
+                  _hover={"backgroundColor:none"} border={'1px solid'}>
             <FontAwesomeIcon icon={faShare} style={{color: "#74C0FC",}} size="2xl"/>
             </Button>
             <AlertDialog
@@ -329,7 +333,7 @@ export default function SingleNewsPage() {
                 onClick={() => handleIconClick(faFacebook)}
               />
             </div>
-                <Button onClick={handleShare} mt={4}>Share</Button>
+                <Button onClick={handleShare} mt={4} >Share</Button>
                   
                 </AlertDialogBody>
                 <AlertDialogFooter>
