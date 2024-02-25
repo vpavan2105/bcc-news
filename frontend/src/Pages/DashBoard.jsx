@@ -5,30 +5,35 @@ import { Box, Heading } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import BookMarkedCard from "../components/BookMarkedCard";
-import { usersURL } from "../apiRequest";
+import { dashBoardURL, usersURL } from "../apiRequest";
 
 export default function DashBoard() {
   const [ bookmark, setBookmark ] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  // let user;
+  // try {
+  //     user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
+  // } catch (error) {
+  //     console.error("Error parsing user data from localStorage:", error);
+  //     user = { bookmark: [] }; // Fallback value in case of parsing error
+  // }
   let user;
-  try {
-      user = JSON.parse(localStorage.getItem('user')) || { bookmark: [] }; // Ensure user is an object with a bookmark property
-  } catch (error) {
-      console.error("Error parsing user data from localStorage:", error);
-      user = { bookmark: [] }; // Fallback value in case of parsing error
+  try{
+    user=JSON.parse(localStorage.getItem('user')) || {id:1 };
+  }catch(error){
+    user={id:1}
   }
-
   function deleteNewsItem(){
     
   }
   useEffect(() => {
     console.log(bookmark);
-    const fetchUser = async () => {
+    const fetchBookmark = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${usersURL}/${user.id}`);
+        const response = await fetch(`${dashBoardURL}/${user.id}`);
         const data = await response.json();
         console.log(data);
         setBookmark(data.bookmark); 
@@ -39,7 +44,7 @@ export default function DashBoard() {
         setError(true);
       }
     };
-    fetchUser();
+    fetchBookmark();
   }, []);
 
   return (
@@ -57,9 +62,8 @@ export default function DashBoard() {
               size="xl"
               ml={["10px", "50px", "100px"]}
               mb="5"
-              textDecoration="underline"
             >
-              Saved News
+             { `HI, ${user.username} your BookMarked News`}
             </Heading>
             <SimpleGrid
               columns={[1, 2, 4]}

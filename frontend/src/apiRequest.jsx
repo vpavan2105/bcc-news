@@ -12,17 +12,17 @@ export const generalURL = `${baseURL}/general` ;
 export const technologyURL = `${baseURL}/technology` ;
 export const politicsURL = `${baseURL}/politics` ;
 export const healthURL = `${baseURL}/entertainment` ;
+export const dashBoardURL = `${baseURL}/dashboard`;
 
-
-export async function addNewsToBookmark(newsItem,user) {
+export async function addNewsToBookmark(bookmark,user) {
     try{
-        let res = await axios.patch(`${usersURL}/${user.id}`,{
-            bookmark:[
-              ...newsItem,
-            ]
+        let res = await axios.patch(`${dashBoardURL}/${user}`,{
+            bookmark
         })
+  
         // let data = await res.json() ;
         console.log(res) ;
+     
     }catch(error){
         console.log(error) ;
     }
