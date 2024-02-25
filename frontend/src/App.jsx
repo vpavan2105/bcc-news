@@ -15,6 +15,7 @@ import Science from "./Pages/Science";
 import Sports from "./Pages/Sports";
 import Technology from "./Pages/Technology";
 
+
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
       <CardComponent/> */}
       </SimpleGrid>
       {/* <Login/> */}
+    
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -38,6 +40,7 @@ function App() {
         <Route path="/politics" element={<Politics />} />
         <Route path='/news/:id' element={<SingleNewsPage/>}/>
       </Routes>
+    
     </>
   )
 }
