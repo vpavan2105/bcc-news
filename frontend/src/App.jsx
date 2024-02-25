@@ -20,6 +20,8 @@ import DashBoard from "./Pages/DashBoard";
 import PrivateRoute from "./Routes/PrivateRoute";
 // import Contact from "./Pages/Contact";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import SignupForm from "./components1/SignUp";
 
 function App() {
   useEffect(()=>{
@@ -68,9 +70,11 @@ function App() {
 
     localStorage.setItem("user",JSON.stringify(dummyuser))
   },[])
+
+  const isAuth = useSelector(state => state.login.isAuth);
   return (
     <>
-    <AdminPage/>
+    {/* <AdminPage/> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
@@ -85,6 +89,10 @@ function App() {
         <Route path='/health' element={  <Health/> }/>
         <Route path='/technology' element={  <Technology/> }/>
         {/* <Route path='/contact' element={  <Contact/> }/> */}
+        <Route path='/signup' element={  <SignupForm/> }/>
+
+       
+
       </Routes>
     
     </>
