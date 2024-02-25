@@ -36,5 +36,13 @@ export const BookmarkReducer = (state = initialBookMark , action) => {
         default :
             return state ;
     }
+}
 
+export const searchReducer = (state = "" , action) => {
+    switch(action.type){
+        case "SEARCH" :
+            return action.payload
+        default :
+            return state ;
+    }
 }
