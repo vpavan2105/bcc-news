@@ -1,12 +1,13 @@
 import Navbar from "../components/Navbar";
 import React, { useState, useEffect } from "react";
-import { Divider, Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
+import { Grid, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import { Box, Heading } from "@chakra-ui/react";
 import CardComponent from "../components/CardComponent";
 import { scienceURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
-function Science() {
+import { useSelector } from "react-redux";
+export default function Science() {
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
   const [space, setSpaceNews] = useState([]);
@@ -17,34 +18,36 @@ function Science() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const search = useSelector(state=>state.search)
+
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try {
         const response = await fetch(`${scienceURL}`);
         const data = await response.json();
-        const mainSectionDataArr = data.filter((item) =>
+        const mainSectionDataArr = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
           item.category === "top-news" ? true : false
         );
         setFirstTopNews(mainSectionDataArr[0]);
         setOtherTopNews(mainSectionDataArr.slice(1, 5));
         setSpaceNews(
-          data.filter((item) => (item.category === "space" ? true : false))
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "space" ? true : false))
         );
         setSpaceResearchNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "space-research" ? true : false
           )
         );
         setDiscoverNews(
-          data.filter((item) => (item.category === "discover" ? true : false))
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "discover" ? true : false))
         );
         setRelatedNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "related-news" ? true : false
           )
         );
-        console.log(data);
+        // console.log(data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -53,7 +56,7 @@ function Science() {
       }
     };
     fetchPoliticsNews();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -64,15 +67,15 @@ function Science() {
         <Heading>Error...</Heading>
       ) : (
         <>
-          <Heading
+          { firstTopNews &&  otherTopNews && <Heading
             as="h1"
             size="xl"
             ml={["10px", "50px", "100px"]}
             textDecoration="underline"
           >
             Morning Headlines
-          </Heading>
-          <Grid
+          </Heading>}
+          {   firstTopNews &&  otherTopNews && <Grid
             h={["auto", "auto", "400px"]}
             templateRows={[
               "repeat(2, 1fr)",
@@ -116,9 +119,9 @@ function Science() {
             {otherTopNews?.map((item, index) => {
               return <MainSmallerCards item={item} key={index} />;
             })}
-          </Grid>
+          </Grid>}
 
-          <Box as="section" py="5" bg="gray.100">
+          { <Box as="section" py="5" bg="gray.100">
             <Heading
               as="h1"
               size="xl"
@@ -137,9 +140,9 @@ function Science() {
                 return <CardComponent newsItem={newsItem} key={index} />;
               })}
             </SimpleGrid>
-          </Box>
+          </Box>}
 
-          <Box as="section" py="5" bg="gray.100">
+          { <Box as="section" py="5" bg="gray.100">
             <Heading
               as="h1"
               size="xl"
@@ -158,9 +161,9 @@ function Science() {
                 return <CardComponent newsItem={newsItem} key={index} />;
               })}
             </SimpleGrid>
-          </Box>
+          </Box>}
 
-          <Box as="section" py="5" bg="gray.100">
+          { <Box as="section" py="5" bg="gray.100">
             <Heading
               as="h1"
               size="xl"
@@ -179,9 +182,9 @@ function Science() {
                 return <CardComponent newsItem={newsItem} key={index} />;
               })}
             </SimpleGrid>
-          </Box>
+          </Box>}
 
-          <Box as="section" py="5" bg="gray.100">
+          { <Box as="section" py="5" bg="gray.100">
             <Heading
               as="h1"
               size="xl"
@@ -201,11 +204,10 @@ function Science() {
                 return <CardComponent newsItem={newsItem} key={index} />;
               })}
             </SimpleGrid>
-          </Box>
+          </Box>}
         </>
       )}
       <Footer />
     </>
   );
 }
-export default Science;

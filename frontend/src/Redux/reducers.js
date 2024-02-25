@@ -22,7 +22,6 @@ export const LoginReducer = (state = initialLoginState, action) => {
         default:
             return state;
     }
-
 }
 
 
@@ -47,10 +46,7 @@ export const SceinceReducer = (state = initialstateforScinece, action) => {
             return {
                 ...state, loading: false, error:"Somethings went wrong", data:[]
             }
-
-
     }
-
 }
 let user;
 try {
@@ -72,9 +68,10 @@ export const BookmarkReducer = (state = initialBookMark , action) => {
     }
 
 }
-export const mainSectionNewsReducer = (state= [], action) => {
+
+export const searchReducer = (state = "", action) => {
     switch(action.type){
-        case "ADD_MAIN_SECTION_NEWS" :
+        case "SEARCH" :
             return  action.payload  ;
         default :
             return state ;

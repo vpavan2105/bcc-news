@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../images/logo.png";
 import user from "../images/user.png";
 import lens from "../images/lens.png";
@@ -11,6 +11,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const login = useSelector((state) => state);
   const [showMenu, setShowMenu] = useState(false);
+  const search = useSelector(state=>state.search)
 
   const handleLogout = () => {
     dispatch(LogoutAction());
@@ -24,9 +25,13 @@ export default function Navbar() {
     setShowMenu(!showMenu);
   };
 
-  const handleSearch = () => {
-    
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch({type:"SEARCH",payload:e.target.value})
   };
+  useEffect(() => {
+    console.log(search)
+  },[search])
 
   return (
     <div className="bg-black text-white sticky top-0 z-20 w-full">

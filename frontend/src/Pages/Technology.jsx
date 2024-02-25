@@ -6,7 +6,8 @@ import CardComponent from "../components/CardComponent";
 import { technologyURL } from "../apiRequest";
 import Footer from "../components/Footer";
 import MainSmallerCards from "../components/MainSmallerCards";
-function Technology() {
+import { useSelector } from "react-redux";
+export default function Technology() { 
   const [firstTopNews, setFirstTopNews] = useState({});
   const [otherTopNews, setOtherTopNews] = useState([]);
   const [techWorld, setTechWorld] = useState([]);
@@ -17,22 +18,24 @@ function Technology() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const search = useSelector(state=>state.search)
+
   useEffect(() => {
     const fetchPoliticsNews = async () => {
       setLoading(true);
       try{
         const response = await fetch(`${technologyURL}`);
         const data = await response.json();
-        const mainSectionDataArr = data.filter((item) =>
+        const mainSectionDataArr = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
         item.category === "top-news" ? true : false
       );
       setFirstTopNews(mainSectionDataArr[0]);
       setOtherTopNews(mainSectionDataArr.slice(1, 5));
-        setTechWorld(data.filter( item => item.category === "tech-world" ? true:false ) )
-        setModrenTech(data.filter( item => item.category === "modren-tech" ? true:false ) )
-        setTechWay(data.filter( item => item.category === "tech-way" ? true:false ) )
-        setRelatedNews(data.filter( item => item.category === "related-news" ? true:false ) )
-        console.log(data);
+        setTechWorld(data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter( item => item.category === "tech-world" ? true:false ) )
+        setModrenTech(data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter( item => item.category === "modren-tech" ? true:false ) )
+        setTechWay(data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter( item => item.category === "tech-way" ? true:false ) )
+        setRelatedNews(data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter( item => item.category === "related-news" ? true:false ) )
+        // console.log(data);
         setLoading(false);
       } catch (error) {
         console.log(error) ;
@@ -42,7 +45,7 @@ function Technology() {
       
     };
     fetchPoliticsNews();
-  }, []);
+  }, [search]);
   
   return (
     <>
@@ -52,15 +55,15 @@ function Technology() {
         ) : error ? (
           <Heading>Error...</Heading>
         ) : ( <>
-        <Heading
+        { firstTopNews && otherTopNews && <Heading
             as="h1"
             size="xl"
             ml={["10px", "50px", "100px"]}
             textDecoration="underline"
           >
             Morning Headlines
-          </Heading>
-          <Grid
+          </Heading>}
+          { firstTopNews && otherTopNews && <Grid
             h={["auto", "auto", "400px"]}
             templateRows={[
               "repeat(2, 1fr)",
@@ -104,7 +107,7 @@ function Technology() {
             {otherTopNews?.map((item, index) => {
               return <MainSmallerCards item={item} key={index} />;
             })}
-          </Grid>
+          </Grid>}
 
               <Box as="section" py="5" bg="gray.100">
                 <Heading as="h1" size="xl" ml={["10px", "50px", "100px"]} mb="5"
@@ -181,4 +184,3 @@ function Technology() {
     </>
   );
 }
-export default Technology;
