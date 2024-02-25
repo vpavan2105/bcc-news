@@ -10,9 +10,9 @@ const initialLoginState = {
 export const LoginReducer = (state = initialLoginState, action) => {
     switch (action.type) {
         case "LOGIN":
-            return { ...state, isAuth: true, token: action.payload.token, userName: action.payload.userName }
+            return { ...state, isAuth: true}
         case "LOGOUT":
-            return { ...state, isAuth: true, token: "", userName: "" };
+            return { ...state, isAuth: false};
         default:
             return state;
     }

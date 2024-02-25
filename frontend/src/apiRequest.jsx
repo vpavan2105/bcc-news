@@ -98,3 +98,13 @@ export const fetchEntertainmentNews = async () => {
       console.log(error);
     }
 };
+
+export const fetchUsers = async () => {
+  try {
+    const response = await fetch(`${usersURL}`);
+    let data = await response.json();
+    return data ;
+  } catch (error) {
+    console.log(error);
+  }
+};
