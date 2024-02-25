@@ -70,6 +70,7 @@ function App() {
   },[])
   return (
     <>
+    <AdminPage/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
