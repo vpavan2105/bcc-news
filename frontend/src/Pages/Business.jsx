@@ -18,6 +18,8 @@ function Business() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const search = useSelector(state=>state.search)
+
   const {isAuth}  = useSelector( state => state.login ) ;
   useEffect(() => {
     const fetchPoliticsNews = async () => {
@@ -25,26 +27,26 @@ function Business() {
       try {
         const response = await fetch(`${businessURL}`);
         const data = await response.json();
-        const mainSectionDataArr = data.filter((item) =>
+        const mainSectionDataArr = data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
           item.category === "top-news" ? true : false
         );
         setFirstTopNews(mainSectionDataArr[0]);
         setOtherTopNews(mainSectionDataArr.slice(1, 5));
         setNationaNews(
-          data.filter((item) => (item.category === "national" ? true : false))
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) => (item.category === "national" ? true : false))
         );
         setInternationalNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "international" ? true : false
           )
         );
         setStockMarketNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "stock-market" ? true : false
           )
         );
         setRelatedNews(
-          data.filter((item) =>
+          data.filter((item)=>{ return search.toLowerCase()==="" ? item : item.title.toLowerCase().includes(search) }).filter((item) =>
             item.category === "related-news" ? true : false
           )
         );
@@ -57,7 +59,7 @@ function Business() {
       }
     };
     fetchPoliticsNews();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -68,15 +70,15 @@ function Business() {
         <Heading>Error...</Heading>
       ) : (
         <>
-          <Heading
+          {  firstTopNews && otherTopNews && <Heading
             as="h1"
             size="xl"
             ml={["10px", "50px", "100px"]}
             textDecoration="underline"
           >
             Morning Headlines
-          </Heading>
-          <Grid
+          </Heading>}
+          {  firstTopNews && otherTopNews && <Grid
             h={["auto", "auto", "400px"]}
             templateRows={[
               "repeat(2, 1fr)",
@@ -120,7 +122,7 @@ function Business() {
             {otherTopNews?.map((item, index) => {
               return <MainSmallerCards item={item} key={index} />;
             })}
-          </Grid>
+          </Grid>}
 
           <Box as="section" py="5" bg="gray.100">
             <Heading

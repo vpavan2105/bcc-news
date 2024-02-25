@@ -82,6 +82,8 @@ function App() {
         <Route path="/politics" element={<Politics />} />
         <Route path='/:category/:id' element={<SingleNewsPage/>}/>
         <Route path='/dashboard' element={  <DashBoard/> }/>
+        <Route path='/health' element={  <Health/> }/>
+        <Route path='/technology' element={  <Technology/> }/>
         {/* <Route path='/contact' element={  <Contact/> }/> */}
       </Routes>
     
