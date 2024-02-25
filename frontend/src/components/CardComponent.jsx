@@ -34,20 +34,16 @@ export default function CardComponent({newsItem,isAuth}) {
 
   const handleAddBookMark = async() => {
     
-    let user;
-    try{
-      user=JSON.parse(localStorage.getItem('user')) || {id:1 };
-    }catch(error){
-      user={id:1}
-    }
+    let user=JSON.parse(localStorage.getItem('user')) ;
+  
 
-      const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user.id}`)
+      const response= await axios.get(`https://bcc-news-backend.onrender.com/dashboard/${user}`)
       const addbookmark=response.data.bookmark
      
       console.log(response.data);
    
-    // if(isAuth){
-      // dispatch({type:"ADD_TO_BOOKMARK",payload:newsItem}) ;
+    if(isAuth){
+      dispatch({type:"ADD_TO_BOOKMARK",payload:newsItem}) ;
     
       if (addbookmark?.some(item => item.id === newsItem.id && item.category_section === newsItem.category_section)) {
         alert("Already bookmarked")
@@ -55,13 +51,13 @@ export default function CardComponent({newsItem,isAuth}) {
         // user.bookmark = [...user.bookmark,newsItem] ;
         // localStorage.setItem('user', JSON.stringify(user)) ;
         
-        addNewsToBookmark([...addbookmark,newsItem],user.id) ;
+        addNewsToBookmark([...addbookmark,newsItem],user) ;
         console.log([...addbookmark,newsItem])
       }
       
-    // }else{
-    //   navigate("/login");
-    // }
+    }else{
+      navigate("/login");
+    }
   }
  
   return (
@@ -84,14 +80,16 @@ export default function CardComponent({newsItem,isAuth}) {
           onClick={handleNavigation}
         />
         <Box p="6" onClick={handleNavigation}>
+          <Box height={'120px'}>
           <Heading as="h3" size="md" mb="2" noOfLines={2}>
             {newsItem.title}
           </Heading>
           <Text fontSize="sm" color="gray.600" noOfLines={3}>
             {newsItem.description}
           </Text>
+          </Box>
         </Box>
-        <Button bgColor='black' color={"white"} size={"sm"} position={"relative"} left={"60%"} top={"-10px"} _hover={{transform: "scale(1.05)"}} onClick={handleAddBookMark}>
+        <Button bgColor='orange' color={"white"} size={"sm"} position={"relative"} left={"60%"} top={"-10px"} _hover={{transform: "scale(1.05)"}} onClick={handleAddBookMark}>
           Book Mark
         </Button>
       </Box>

@@ -28,10 +28,14 @@ export async function addNewsToBookmark(bookmark,user) {
     }
 }
 
-export async function deleteNewsFromBookmark(newsItemId, userId) {
+export async function deleteNewsFromBookmark(newsItem, userId) {
     try {
-        let res = await axios.delete(`${usersURL}/${userId}/bookmark/${newsItemId}`);
-        console.log(res);
+        let res = await axios.put(`${dashBoardURL}/${userId}`,{
+           bookmark:[...newsItem]
+        });
+        
+        return res;
+       
     } catch (error) {
         console.log(error);
     }
