@@ -29,11 +29,11 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faThumbsUp,faEnvelope, faShare} from "@fortawesome/free-solid-svg-icons";
+import { faComment, faThumbsUp, faShare} from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp,faInstagram ,faTwitter,faFacebook, faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../index.css";
 import { baseURL } from "../apiRequest";
@@ -48,58 +48,75 @@ export default function SingleNewsPage() {
   const [colorComment, setColorComment] = useState("lightblue");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const [randomNews, setRandomNews] = useState([]);
+  const navigate = useNavigate() ;
+  const [ loggedInUser, setLoggedInUser ] = useState({}) ;
   ///// userparams
   useEffect(() => {
+    let localStorageUser = JSON.parse(localStorage.getItem('user')) || {} ;
+    setLoggedInUser(localStorageUser) ;
     axios
       .get(`${baseURL}/${category}/${id}`)
       .then((res) => res.data)
       .then((data) => setSingleNews(data));
-
    
   }, []);
 
   const handleInputComment = async (e) => {
     e.preventDefault();
-  if(comment!=""){
-    axios
-      .get(`${baseURL}/${category}/${id}`)
-      .then((res) => res.data)
-      .then((data) => {
-        const updateComment = [
-          ...data.comments,
-          { user: "pavan", comment: comment },
-        ];
-        axios
-          .patch(`https://testing-arqw.onrender.com/${category}/${id}`, {
-            comments: updateComment,
-          })
-          .then((response) => {
-            // Check if status code is in the range 200-299
-            console.log(response);
-            if (response.status >= 200 && response.status < 300) {
-              console.log("User comment updated successfully");
-              setSingleNews(response.data);
-            } else {
-              throw new Error("Failed to update user bookmark");
-            }
-          })
-          .catch((error) => {
-            console.error("Error updating user bookmark:", error);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
+    if( !loggedInUser.id ){
+      toast({
+        title: "Login First",
+        description: "Please Login to Add Comment",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
       });
-    setComment("");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+      
+    }else{
+      if(comment!=""){
+        axios
+          .get(`${baseURL}/${category}/${id}`)
+          .then((res) => res.data)
+          .then((data) => {
+            const updateComment = [
+              ...data.comments,
+              { user: loggedInUser.username, comment: comment },
+            ];
+            axios
+              .patch(`${baseURL}/${category}/${id}`, {
+                comments: updateComment,
+              })
+              .then((response) => {
+                // Check if status code is in the range 200-299
+                console.log(response);
+                if (response.status >= 200 && response.status < 300) {
+                  console.log("User comment updated successfully");
+                  setSingleNews(response.data);
+                } else {
+                  throw new Error("Failed to update user bookmark");
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating user bookmark:", error);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        setComment("");
+        }
     }
+  
   
   };
   const handleShare = () => {
     if (selectedIcon) {
       toast({
         title: "Message Sent Successfully",
-        description: `Your message has been sent via ${selectedIcon.name}.`,
+        description: `Your message has been sent .`,
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -149,7 +166,7 @@ export default function SingleNewsPage() {
     <>
       <Navbar />
       <Card borderRadius="md" height={"auto"} marginTop={"12px"}>
-        <Flex direction="column" m="auto">
+        <Flex direction="column" m="auto" >
           <CardHeader boxShadow={" rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;"}>
             <Heading as="h2" size="md" mb="2" color={"blue"}>
               {singleNews.title}
@@ -194,12 +211,14 @@ export default function SingleNewsPage() {
             </Flex>
           </CardBody>
 
-          <Flex align="center" mt="4">
+          <Flex align="center" mt="4" gap={'16px'} marginBottom={'200px'} justify={'center'}>
             <Button
               flex="1"
+             
               backgroundColor={"white"}
               _hover={"backgroundColor:none"}
               onClick={handleLike}
+              border={'1px solid'}
             >
               <FontAwesomeIcon
                 icon={faThumbsUp}
@@ -214,7 +233,7 @@ export default function SingleNewsPage() {
                   flex="1"
                   backgroundColor={"white"}
                   _hover={"backgroundColor:none"}
-                  
+                  border={'1px solid'}
                 >
                   <FontAwesomeIcon
                     icon={faComment}
@@ -253,6 +272,7 @@ export default function SingleNewsPage() {
                       placeholder="Enter comment.."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
+                      
                     />
                     <InputRightElement width="4.5rem">
                       <Button
@@ -269,7 +289,7 @@ export default function SingleNewsPage() {
               </PopoverContent>
             </Popover>
             <Button flex="1" onClick={onOpen}  backgroundColor={"white"}
-                  _hover={"backgroundColor:none"}>
+                  _hover={"backgroundColor:none"} border={'1px solid'}>
             <FontAwesomeIcon icon={faShare} style={{color: "#74C0FC",}} size="2xl"/>
             </Button>
             <AlertDialog
@@ -329,7 +349,7 @@ export default function SingleNewsPage() {
                 onClick={() => handleIconClick(faFacebook)}
               />
             </div>
-                <Button onClick={handleShare} mt={4}>Share</Button>
+                <Button onClick={handleShare} mt={4} >Share</Button>
                   
                 </AlertDialogBody>
                 <AlertDialogFooter>
