@@ -1,6 +1,6 @@
 # bbc-news
 
-<img src="./Screenshots/logo.jpg" width="150px">
+<img src="./Screenshots/logo.png" width="150px">
 
 
 
@@ -9,19 +9,19 @@ This project aims to replicate the functionality and design of BBC News, providi
 
 ## Team Members
 
-- Team Lead: [PavanKumar] 
-- Team Members: 
-    [SaurabhGangoly] 
-    [PoornimaMohabe] 
-    [SachinMohithe]
-    [SachinKumanache]
+    - Team Lead: [Pavan Kumar] 
+    - Team Members: 
+        [Saurabh Gangoly] 
+        [Poornima Mohabe] 
+        [Sachin Mohithe]
+        [Sachin Kumanache]
 
 ## Project Type
 Frontend | Backend | Fullstack
 
 ## Deplolyed App
-Frontend: https://bbc-news-lovat.vercel.app/
-Backend: https://bcc-news-backend.onrender.com/
+    Frontend: https://bbc-news-lovat.vercel.app/
+    Backend: https://bcc-news-backend.onrender.com/
 
 
 ## Directory Structure
@@ -81,8 +81,6 @@ Backend: https://bcc-news-backend.onrender.com/
           └── vite.config.js
 
 
-## Features
-List out the key features of your application.
 
 ### Features:
 - **News Categories:** Provides a wide array of news categories including world news, politics, business, technology, science, health, and more.
@@ -122,32 +120,27 @@ npm json-server --watch db.json --port 3001
 
 ### SignupPage/RegisterPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-signup-2024-02-26-11_33_29.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-signup-2024-02-26-11_33_29.png" height="550px" width="800px">
 
 ### SignInPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-login-2024-02-26-11_39_04.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-login-2024-02-26-11_39_04.png" height="650px" width="800px">
 
 ### HomePage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-2024-02-26-11_34_08.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-2024-02-26-11_34_08.png" height="1450px" width="800px">
 
 ### GeneralPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-2024-02-26-11_34_18.png" height="450px" width="800px">
-
-### SciencePage
-
-
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-science-2024-02-26-11_47_35.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-2024-02-26-11_34_18.png" height="1450px" width="800px">
 
 ### SigleNewsPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-36-2024-02-26-11_35_59.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-36-2024-02-26-11_35_59.png" height="650px" width="800px">
 
 ### BookmarkPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-dashboard-2024-02-26-11_34_52.png" height="450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-dashboard-2024-02-26-11_34_52.png" height="650px" width="800px">
 
 ## Credentials:
 
