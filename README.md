@@ -9,9 +9,9 @@ This project aims to replicate the functionality and design of BBC News, providi
 
 ## Team Members
 
-    - Team Lead: [Pavan Kumar] 
+    - Team Lead: [Saurabh Gangoly] 
     - Team Members: 
-        [Saurabh Gangoly] 
+        [Pavan Kumar] 
         [Poornima Mohabe] 
         [Sachin Mohithe]
         [Sachin Kumanache]
