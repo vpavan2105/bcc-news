@@ -1,6 +1,6 @@
 # bbc-news
 
-<img src="./Screenshots/logo.png" width="150px">
+<img src="./Screenshots/logo.jpg" width="150px">
 
 
 
@@ -120,27 +120,27 @@ npm json-server --watch db.json --port 3001
 
 ### SignupPage/RegisterPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-signup-2024-02-26-11_33_29.png" height="550px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-signup-2024-02-26-11_33_29.png" height="450px" width="800px">
 
 ### SignInPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-login-2024-02-26-11_39_04.png" height="650px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-login-2024-02-26-11_39_04.png" height="500px" width="800px">
 
 ### HomePage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-2024-02-26-11_34_08.png" height="1450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-2024-02-26-11_34_08.png" height="1950px" width="800px">
 
 ### GeneralPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-2024-02-26-11_34_18.png" height="1450px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-2024-02-26-11_34_18.png" height="1950px" width="800px">
 
 ### SigleNewsPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-36-2024-02-26-11_35_59.png" height="650px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-general-36-2024-02-26-11_35_59.png" height="750px" width="800px">
 
 ### BookmarkPage
 
-<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-dashboard-2024-02-26-11_34_52.png" height="650px" width="800px">
+<img src="./Screenshots/screencapture-bbc-news-lovat-vercel-app-dashboard-2024-02-26-11_34_52.png" height="550px" width="800px">
 
 ## Credentials:
 
@@ -158,8 +158,7 @@ To access authenticated pages, you can use the following credentials:
 
 ## Technologies Used:
 - **Frontend:** HTML5, CSS3, JavaScript (React.js)
-- **Backend:** Node.js, bd.json
-- **Database:** MongoDB
+- **Backend:** server.js, db.json
 - **Deployment:** Vercel , Render
 
 
